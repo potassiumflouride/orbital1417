@@ -77,12 +77,8 @@ WSGI_APPLICATION = 'orbital1417.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'orbital1417',
-        'USER': 'root',
-        'PASSWORD':'Benz5508',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
