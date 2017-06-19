@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from .import views as main_views
 
 urlpatterns = [
     #url(r'^$', admin.site.urls), #homepage
+    #url(r'^$',main_views.homePage, name='homepage'), # problem cannot make homepage
     url(r'^admin/', admin.site.urls),
     url(r'^charity/', include('charity.urls')),
     url(r'^pairing/', include('pairing.urls')),
