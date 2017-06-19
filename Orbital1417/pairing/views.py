@@ -11,13 +11,14 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.template.loader import render_to_string
+from django.http import HttpResponse
 
 from pairing.forms import SignUpForm
 from pairing.tokens import account_activation_token
 
+from django.core.mail import EmailMessage
+from django.http import HttpResponse
 
-
-# email functions
 
 
 
@@ -50,11 +51,11 @@ def signup(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
+
             toemail=form.cleaned_data.get('email')
-            email = EmailMessage(subject, message, to=[toemail])
-            email.send()
+            # email = EmailMessage(subject, message, to=[toemail])
 
-
+            sendHTMLEmail(request , toemail)
 
             return redirect('account_activation_sent')
     else:
@@ -62,7 +63,12 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
-
+def sendHTMLEmail(request , emailto):
+   html_content = "<strong>HUH-y Account Activation</strong>"
+   email = EmailMessage("Account Activation", html_content, "orbital1417@gmail.com", [emailto])
+   email.content_subtype = "html"
+   res = email.send()
+   return HttpResponse('%s'%res)
 
 def account_activation_sent(request):
 
