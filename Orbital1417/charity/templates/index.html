@@ -1,11 +1,25 @@
 {% include 'partials/header.html' %}
-<ul>
-{% for po in post %}
-<li>{{po.author}} : {{po.title}}</li>
+
 <br>
-<li>{{po.text}}</li>
+<br>
+<br>
+<br>
+<div>
+{% for po in post %}
+By {{po.author}}
+<br>
+{{po.title}}
+<br>
+{{po.text}}
+<br>
+<br>
+<br>
+<br>
+<br>
 {% endfor %}
-</ul>
-
-
+</div>
+<br>
+<br>
+<br>
+<br>
 {% include 'partials/footer.html' %}

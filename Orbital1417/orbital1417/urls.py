@@ -21,6 +21,7 @@ urlpatterns = [
     #url(r'^$', admin.site.urls), #homepage
     #url(r'^$',main_views.homePage, name='homepage'), # problem cannot make homepage
     url(r'^admin/', admin.site.urls),
+    url(r'^$', include('homepage.urls')),
     url(r'^charity/', include('charity.urls')),
     url(r'^pairing/', include('pairing.urls')),
 ]

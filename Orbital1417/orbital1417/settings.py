@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'homepage', #homepage app by ben 20/6/17
     'pairing',
     'charity',
     'django.contrib.admin',
