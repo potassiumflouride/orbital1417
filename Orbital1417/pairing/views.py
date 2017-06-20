@@ -18,6 +18,7 @@ from pairing.tokens import account_activation_token
 
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
+from django.core.mail import send_mail
 
 
 
@@ -54,8 +55,8 @@ def signup(request):
 
             toemail=form.cleaned_data.get('email')
             # email = EmailMessage(subject, message, to=[toemail])
-
-            sendHTMLEmail(request , toemail)
+            send_mail('testingsubject', 'testingbody', 'orbital1417@gmail.com', ['maplesight@hotmail.com'])
+            #sendHTMLEmail(request , toemail)
 
             return redirect('account_activation_sent')
     else:
@@ -63,12 +64,13 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
-def sendHTMLEmail(request , emailto):
+'''def sendHTMLEmail(request , emailto):
    html_content = "<strong>HUH-y Account Activation</strong>"
    email = EmailMessage("Account Activation", html_content, "orbital1417@gmail.com", [emailto])
    email.content_subtype = "html"
    res = email.send()
    return HttpResponse('%s'%res)
+   '''
 
 def account_activation_sent(request):
 
