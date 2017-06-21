@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,render_to_response
 
 from django.http import HttpResponse
 
@@ -44,7 +44,7 @@ def pairingSignUp(request):
             return redirect('/$')
     else:
         form= PairingSignupform()
-    return render(request,'pairingform.html', {'form':form})
+    return render(request,'pairingform.html', {'pairingSignupform':form})
 
     '''
     if request.user.is_authenticated():  #if user is already logined

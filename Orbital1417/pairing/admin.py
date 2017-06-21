@@ -21,5 +21,7 @@ admin.site.register(Pairing, PairingAdmin)
 
 class pairingSignupAdmin(admin.ModelAdmin):
     list_display= ['name','contact','experiences','created_date',]
+    fields= ['name','contact','experiences','created_date',]
+
 
 admin.site.register(PairingSignupData, pairingSignupAdmin)

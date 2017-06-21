@@ -1,5 +1,6 @@
 <div class="container">
-  <form id="contact" action="" method="post">
+  <form id="pairingSignupform" action="" method="POST" >
+    {% csrf_token %}
     <h3>Pairing Sign Up Form</h3>
     <h4>Fill in your personal particulars</h4>
     <fieldset>

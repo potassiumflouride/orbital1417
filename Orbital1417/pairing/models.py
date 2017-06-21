@@ -29,10 +29,10 @@ class Pairing (models.Model):
         return self.title
 
 class PairingSignupData (models.Model):
-    name= models.CharField(max_length=20)
+    name= models.CharField(primary_key= True, max_length=20)
     contact= models.IntegerField()
     experiences= models.TextField()
     created_date= models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.title
+        return self.name
