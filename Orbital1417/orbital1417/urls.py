@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^$', include('homepage.urls')),
     url(r'^charity/', include('charity.urls')),
     url(r'^pairing/', include('pairing.urls')),
+    url(r'^userAcc/', include('userAcc.urls')),
 ]

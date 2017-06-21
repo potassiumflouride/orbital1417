@@ -1,11 +1,15 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
+from models import PairingSignupData
 
-class SignUpForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+class PairingSignupform(forms.Form):
+    '''
+    name=forms.CharField (label='Your name', max_length=100)
+    contact=forms.IntegerField (label='Your Phone Number')
+    experiences=forms.TextField(label='Enter your relevant experience')
+    created_date= forms.DateTimeField(default=timezone.now)
+    '''
 
     class Meta:
-        model = User
-        fields = ('username', 'email', 'password1', 'password2', )
+        model= PairingSignupData
+        fields = ('name', 'contact', 'experiences', 'created_date',)

@@ -3,92 +3,67 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render,redirect
 
+from django.http import HttpResponse
 
-from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
 from django.contrib.auth.models import User
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from django.http import HttpResponse
 
-from pairing.forms import SignUpForm
-from pairing.tokens import account_activation_token
+from django.contrib.auth import authenticate, login
 
-from django.core.mail import EmailMessage
-from django.http import HttpResponse
-from django.core.mail import send_mail
+from django.http import HttpResponseRedirect
 
+from pairing.forms import PairingSignupform
 
+from userAcc.forms import SignUpForm
 
+from django.contrib.auth.decorators import login_required
 
+from models import Pairing
 # Create your views here.
 # main pairing page to allow charity to post their job listing
-def pairing(request):
+def pairingPost(request):
+
+    post = Pairing.objects.all()
+
+    query = request.GET.get('q')
+    if query:
+        post = post.filter(title__icontains=query)
+
+    context = {
+    'post':post
+    }
     return render(request, 'pairingPage.html')
 
-
-
-
 @login_required
-def home(request):
-    return render(request, 'home.html')
-
-
-def signup(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
+def pairingSignUp(request):
+    if request.method== 'POST':
+        form= PairingSignupform(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
-
-            current_site = get_current_site(request)
-            subject = 'Activate Your orbital1417 Account'
-            message = render_to_string('account_activation_email.html', {
-                'user': user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': account_activation_token.make_token(user),
-            })
-
-            toemail=form.cleaned_data.get('email')
-            # email = EmailMessage(subject, message, to=[toemail])
-            send_mail('testingsubject', 'testingbody', 'orbital1417@gmail.com', ['maplesight@hotmail.com'])
-            #sendHTMLEmail(request , toemail)
-
-            return redirect('account_activation_sent')
+            form.save()
+            return redirect('/$')
     else:
-        form = SignUpForm()
-    return render(request, 'signup.html', {'form': form})
+        form= PairingSignupform()
+    return render(request,'pairingform.html', {'form':form})
 
+    '''
+    if request.user.is_authenticated():  #if user is already logined
+        return HttpResponseRedirect('/$')
+    if request.method == 'POST'         #if user is attempting to login
+        form= login()
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user= authenticate(username = username, password=password)
 
-'''def sendHTMLEmail(request , emailto):
-   html_content = "<strong>HUH-y Account Activation</strong>"
-   email = EmailMessage("Account Activation", html_content, "orbital1417@gmail.com", [emailto])
-   email.content_subtype = "html"
-   res = email.send()
-   return HttpResponse('%s'%res)
-   '''
+            if user is not None:            #if user login parameters are correct
+                login(request, user)
+                return HttpResponseRedirect('/$')
+            else:
+                return render_to_response('userAcc/signup.html', {'form': form},  context_instance = RequestContext(request))
+        else:
+            return render_to_response('userAcc/signup.html', {'form': form},  context_instance = RequestContext(request))
 
-def account_activation_sent(request):
-
-    return render(request, 'account_activation_sent.html')
-
-
-def activate(request, uidb64, token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.profile.email_confirmed = True
-        user.save()
-        login(request, user)
-        return redirect('home')
     else:
-        return render(request, 'account_activation_invalid.html')
+        return render_to_response('userAcc/signup.html', {'form': form},  context_instance = RequestContext(request))
+'''
