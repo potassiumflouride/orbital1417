@@ -27,5 +27,5 @@ def index(request):
         post_list = post_list.filter(title__icontains=query)
         context ={'post':post_list
         }
-    
-    return render(request, 'index.html', context)
+
+    return render(request, 'index_charity.html', context)

@@ -1,6 +1,6 @@
 from django import forms
 
-from models import PairingSignupData
+from pairing.models import PairingSignupData
 
 class PairingSignupform(forms.ModelForm):
 

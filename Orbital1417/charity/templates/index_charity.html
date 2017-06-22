@@ -1,0 +1,38 @@
+{% include 'partials/header_charity.html' %}
+
+<br>
+<br>
+<br>
+<br>
+<div>
+{% for po in post %}
+By {{po.author}}
+<br>
+{{po.title}}
+<br>
+{{po.text}}
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endfor %}
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if post.has_previous %}
+            <a href="?page={{ post.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ post.number }} of {{ post.paginator.num_pages }}.
+        </span>
+
+        {% if post.has_next %}
+            <a href="?page={{ post.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+{% include 'partials/footer_charity.html' %}

@@ -19,7 +19,7 @@ from userAcc.forms import SignUpForm
 
 from django.contrib.auth.decorators import login_required
 
-from models import Pairing
+from pairing.models import Pairing
 # Create your views here.
 # main pairing page to allow charity to post their job listing
 def pairingPost(request):
