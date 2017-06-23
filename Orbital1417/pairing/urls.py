@@ -9,5 +9,5 @@ urlpatterns = [
 
     url(r'^$',pairing_views.pairingPost, name='pairingPost'), #landing page for pairing, with details for charity job listing
 
-    url(r'^signUp/$',pairing_views.pairingSignUp, name='pairingSignUp'),
+    url(r'^signup/$',pairing_views.pairingSignUp, name='pairingSignUp'),
 ]

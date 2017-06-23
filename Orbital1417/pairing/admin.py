@@ -9,7 +9,7 @@ from pairing.models import Pairing, PairingSignupData
 #admin.site.register(Pairing)
 
 
-
+#pairing blog post
 class PairingAdmin(admin.ModelAdmin):
     search_fields= ['charityName', 'title', 'created_date','published_date','text']
     list_display= ('published_date','charityName')
@@ -19,9 +19,11 @@ class PairingAdmin(admin.ModelAdmin):
 
 admin.site.register(Pairing, PairingAdmin)
 
+
+# pairing signup forms
 class pairingSignupAdmin(admin.ModelAdmin):
-    list_display= ['name','contact','experiences','created_date',]
-    fields= ['name','contact','experiences','created_date',]
+    list_display= ['name','contact','email','experiences',]
+    fields= ['name','contact','email','experiences',]
 
 
 admin.site.register(PairingSignupData, pairingSignupAdmin)

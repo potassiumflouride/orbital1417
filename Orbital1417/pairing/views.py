@@ -39,11 +39,12 @@ def pairingPost(request):
 def pairingSignUp(request):
     if request.method== 'POST':
         form= PairingSignupform(request.POST)
+        print("form object created")
+    
         if form.is_valid():
-            form=form.save(commit=False)
-            form.user=request.user
+            print("inputs validated")
             form.save()
-            return redirect('/$')
+            return redirect('/pairing/')
     else:
         form= PairingSignupform()
     return render(request,'pairingform.html', {'pairingSignupform':form})

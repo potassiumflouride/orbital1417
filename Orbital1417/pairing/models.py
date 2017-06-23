@@ -11,6 +11,9 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from django.forms import ModelForm
+
+
 # Create your models here.
 
 # database for details of the charity job listing
@@ -29,10 +32,22 @@ class Pairing (models.Model):
         return self.title
 
 class PairingSignupData (models.Model):
-    name= models.CharField(primary_key= True, max_length=20)
-    contact= models.IntegerField()
-    experiences= models.TextField()
-    created_date= models.DateTimeField(default=timezone.now)
+    name= models.CharField(primary_key=True,max_length=20)
+    email= models.EmailField(null=True,blank=True)
+    contact= models.IntegerField(null=True,blank=True)
+    experiences= models.TextField(null=True,blank=True)
 
     def __str__(self):
         return self.name
+
+
+'''
+class PairingSignupform(ModelForm):
+
+    name= forms.CharField(help_text='Enter your name')
+    contact= forms.IntegerField()
+    experiences= forms.CharField(help_text='Enter your experiences')
+
+    class Meta:
+        model= PairingSignupData
+        fields=['name', 'contact', 'experiences'] '''
