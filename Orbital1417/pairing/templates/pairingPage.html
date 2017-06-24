@@ -76,7 +76,7 @@
 
 <!--Paste your content here!-->
 
-{% block content %}
+<!-- {% block content %}
     <h2> Volunteers Wanted!! </h2>
 
     {% if post %}
@@ -94,7 +94,57 @@
     <p> There are no posts. </p>
     {% endif %}
 
-{% endblock %}
+{% endblock %}-->
+
+<header>
+  <h2> Volunteers Wanted </h2>
+  <div>
+  <form method='GET' action=''>
+  <input type='text' name='q' placeholder='Search posts' value ='{{ request.GET.q }}'/>
+  <input type='submit' value='Search'/>
+  </form>
+  </div>
+</header>
+
+
+
+
+
+<br>
+<br>
+<div>
+{% for po in post %}
+
+<br>
+By {{po.charityName}}
+<br>
+{{po.title}}
+<br>
+{{po.text}}
+<br>
+<br>
+<br>
+
+{% endfor %}
+</div>
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if post.has_previous %}
+            <a href="?page={{ post.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ post.number }} of {{ post.paginator.num_pages }}.
+        </span>
+
+        {% if post.has_next %}
+            <a href="?page={{ post.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
 
 <!--end of content-->
 </div>
