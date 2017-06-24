@@ -33,14 +33,14 @@ def pairingPost(request):
     context = {
     'post':post
     }
-    return render(request, 'pairingPage.html')
+    return render(request, 'pairingPage.html', context)
 
 @login_required
 def pairingSignUp(request):
     if request.method== 'POST':
         form= PairingSignupform(request.POST)
         print("form object created")
-    
+
         if form.is_valid():
             print("inputs validated")
             form.save()
