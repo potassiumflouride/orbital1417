@@ -18,7 +18,8 @@ from django.forms import ModelForm
 
 # database for details of the charity job listing
 class Pairing (models.Model):
-    charityName = models.CharField(primary_key=True,max_length=20)
+    charityName = models.CharField(primary_key=True ,max_length=20)
+    jobcode = models.IntegerField(null=True,blank=True)
     title = models.CharField(max_length=200)
     text= models.TextField()
     created_date= models.DateTimeField(default=timezone.now)
@@ -33,6 +34,7 @@ class Pairing (models.Model):
 
 class PairingSignupData (models.Model):
     name= models.CharField(primary_key=True,max_length=20)
+    jobcode = models.IntegerField(null=True,blank=True)
     email= models.EmailField(null=True,blank=True)
     contact= models.IntegerField(null=True,blank=True)
     experiences= models.TextField(null=True,blank=True)
