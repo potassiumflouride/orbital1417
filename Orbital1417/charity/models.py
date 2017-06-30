@@ -4,7 +4,7 @@ from datetime import datetime
 from django.utils import timezone
 
 class Post(models.Model):
-    model_pic = models.ImageField(upload_to = 'charity/static/img/', default = 'static/img/None/no-img.jpg', null= True, blank =True)
+    #model_pic = models.ImageField(upload_to = 'charity/static/img/', default = 'static/img/None/no-img.jpg', null= True, blank =True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     text = models.TextField()
