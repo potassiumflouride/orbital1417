@@ -9,6 +9,8 @@ class CharPost(models.Model):
     benef = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     text = models.TextField()
+    clat = models.CharField(max_length=200, blank=True, null=True)
+    clng =  models.CharField(max_length=200, blank=True, null=True)
 
     created_date = models.DateTimeField(
             default=timezone.now)

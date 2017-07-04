@@ -80,7 +80,7 @@
   <h2> Track Lah!</h2>
   <div>
   <form method='GET' action=''>
-  <input type='text' name='q' placeholder='Search posts' value ='{{ request.GET.q }}'/>
+  <input type='text' name='q' placeholder='Donation Code' value ='{{ request.GET.q }}'/>
   <input type='submit' value='Search'/>
   </form>
   </div>
@@ -91,15 +91,23 @@
 
 
 <br><br>
-<div>
+<div class="row">
+<div class="col-sm-4">
 {% for po in post %}<br>
+Donation Code: {{po.title}}<br>
 Donated by {{po.donor}}<br>
 Beneficiary: {{po.benef}}<br>
 Located at {{po.location}}<br>
 Description : {{po.text}}
 <br><br>
-{% endfor %}
 </div>
+
+{% load static %}
+<div class="col-sm-3" ><img src= {% static "img/ocip.jpg" %} height="300" width="300"/></div>
+<div class="col-sm-1" ></div>
+<div class="col-sm-3" ><img src= {% static "img/ocip.jpg" %} height="300" width="300"/></div>
+
+</div> <!--end of row-->
 <!--Map API-->
 <head>
     <style>
@@ -114,7 +122,7 @@ Description : {{po.text}}
     <div id="map"></div>
     <script type="text/javascript">
       function initMap() {
-        var uluru = {lat: 1.437513, lng: 103.835583};
+        var uluru = {lat: {{po.clat}} , lng: {{po.clng}}  };
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
           center: uluru
@@ -129,24 +137,26 @@ Description : {{po.text}}
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdXna1Tt7tk8qHzjeadSqpeGp2J7Ci0TI&callback=initMap">
     </script>
   </body>
+
+  {% endfor %}
+
+  <div class="pagination">
+      <span class="step-links">
+          {% if post.has_previous %}
+              <a href="?page={{ post.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ post.number }} of {{ post.paginator.num_pages }}.
+          </span>
+
+          {% if post.has_next %}
+              <a href="?page={{ post.next_page_number }}">next</a>
+          {% endif %}
+      </span>
+  </div>
 <!--Map API-->
 
-
-<div class="pagination">
-    <span class="step-links">
-        {% if post.has_previous %}
-            <a href="?page={{ post.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ post.number }} of {{ post.paginator.num_pages }}.
-        </span>
-
-        {% if post.has_next %}
-            <a href="?page={{ post.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
 <!--end of content-->
 </div>
 </div>
