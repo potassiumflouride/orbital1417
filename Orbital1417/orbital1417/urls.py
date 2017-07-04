@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^charity/', include('charity.urls')),
     url(r'^pairing/', include('pairing.urls')),
     url(r'^userAcc/', include('userAcc.urls')),
+    url(r'^tracklah/', include('tracklah.urls')),
 ]
