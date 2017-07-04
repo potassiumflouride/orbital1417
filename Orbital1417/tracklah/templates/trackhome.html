@@ -10,19 +10,19 @@
         <link rel="icon" href="../../favicon.ico">
 
         <title>HUH-Y</title>
+        {% load static %}
     <!-- https://www.youtube.com/watch?v=DZTnTK4DVOU -->
         <!-- Bootstrap core CSS -->
-        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href= {% static "css/bootstrap.min.css" %} rel="stylesheet">
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-        <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href= {% static "css/ie10-viewport-bug-workaround.css"%} rel="stylesheet">
+
         <!-- Custom styles for this template -->
-        <link href="jumbotron.css" rel="stylesheet">
+        <link href= {% static "css/jumbotron.css" %}rel="stylesheet">
 
         <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
         <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-        <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+        <script src= {% static "js/ie-emulation-modes-warning.js"%} ></script>
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -31,13 +31,7 @@
         <![endif]-->
 
         <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       </head>
 
       <body>
@@ -102,7 +96,7 @@ Description : {{po.text}}
 <br><br>
 </div>
 
-{% load static %}
+
 <div class="col-sm-3" ><img src= {% static "img/ocip.jpg" %} height="300" width="300"/></div>
 <div class="col-sm-1" ></div>
 <div class="col-sm-3" ><img src= {% static "img/ocip.jpg" %} height="300" width="300"/></div>
