@@ -25,3 +25,13 @@ class CharPost(models.Model):
 
     def __str__(self):
         return self.title
+        
+class CharityProjects(models.Model):
+    projectName= models.CharField(max_length=200, blank=True, null=True)
+    charityName= models.CharField(max_length=200, blank=True, null=True)
+    country= models.CharField(max_length=200, blank=True, null=True)
+    lat= models.CharField(max_length=200, blank=True, null=True)
+    lng= models.CharField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return self.title

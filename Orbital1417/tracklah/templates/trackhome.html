@@ -87,7 +87,7 @@
 <br><br>
 <div class="row">
 <div class="col-sm-4">
-{% for po in post %}<br>
+
 Donation Code: {{po.title}}<br>
 Donated by {{po.donor}}<br>
 Beneficiary: {{po.benef}}<br>
@@ -106,7 +106,7 @@ Description : {{po.text}}
 <head>
     <style>
       #map {
-        height: 400px;
+        height: 600px;
         width: 100%;
        }
     </style>
@@ -114,26 +114,18 @@ Description : {{po.text}}
   <body>
     <h3>Track Your Donations With Google Maps</h3>
     <div id="map"></div>
-    <script type="text/javascript">
-      function initMap() {
-        var uluru = {lat: {{po.clat}} , lng: {{po.clng}}  };
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-    </script>
-    <script async defer
+
+
+    <script
+    async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdXna1Tt7tk8qHzjeadSqpeGp2J7Ci0TI&callback=initMap">
     </script>
+    <script type="text/javascript" src="/static/js/googlemap.js" </script>
+
   </body>
 
-  {% endfor %}
 
+<!--
   <div class="pagination">
       <span class="step-links">
           {% if post.has_previous %}
@@ -149,6 +141,7 @@ Description : {{po.text}}
           {% endif %}
       </span>
   </div>
+-->
 <!--Map API-->
 
 <!--end of content-->
