@@ -77,42 +77,47 @@
   <input type='text' name='q' placeholder='Donation Code' value ='{{ request.GET.q }}'/>
   <input type='submit' value='Search'/>
   </form>
+
   </div>
+
 </header>
-
-
-
-
 
 <br><br>
 <div class="row">
-<div class="col-sm-4">
+<div class="col-sm-4"> <!-- Left side of Track Lah -->
 
+{% for po in post %}
+  {% if q %}
 Donation Code: {{po.title}}<br>
 Donated by {{po.donor}}<br>
 Beneficiary: {{po.benef}}<br>
 Located at {{po.location}}<br>
 Description : {{po.text}}
 <br><br>
-</div>
 
+  {% else %}
+<p>Welcome to TrackLah</p>
+<br>
+<p>On the right, the map will display all the projects that has made an impact</p>
+  {% endif %}
+</div><!-- Right side of Track Lah -->
 
+<!-- Images
 <div class="col-sm-3" ><img src= {% static "img/ocip.jpg" %} height="300" width="300"/></div>
 <div class="col-sm-1" ></div>
 <div class="col-sm-3" ><img src= {% static "img/ocip.jpg" %} height="300" width="300"/></div>
-
-</div> <!--end of row-->
-<!--Map API-->
+-->
+<div class="col-sm-8">
 <head>
     <style>
       #map {
-        height: 600px;
+        height: 400px;
         width: 100%;
        }
     </style>
   </head>
   <body>
-    <h3>Track Your Donations With Google Maps</h3>
+  <!--  <h3>Track Your Donations With Google Maps</h3> -->
     <div id="map"></div>
 
 
@@ -120,28 +125,46 @@ Description : {{po.text}}
     async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdXna1Tt7tk8qHzjeadSqpeGp2J7Ci0TI&callback=initMap">
     </script>
-    <script type="text/javascript" src="/static/js/googlemap.js" </script>
+    <script type="text/javascript" src="/static/js/googlemap.js" ></script>
+      {% if q %}
+      <script type="text/javascript">
+      function initMap() {
+        var uluru = {lat: {{po.clat}} , lng: {{po.clng}}  };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    {% endif %}
 
   </body>
+</div><!--end of map-->
+</div> <!--end of row-->
+<!--Map API-->
 
 
-<!--
+
   <div class="pagination">
       <span class="step-links">
           {% if post.has_previous %}
-              <a href="?page={{ post.previous_page_number }}">previous</a>
+              <!--<a href="?page={{ post.previous_page_number }}">previous</a>-->
           {% endif %}
 
           <span class="current">
-              Page {{ post.number }} of {{ post.paginator.num_pages }}.
+              <!--Page {{ post.number }} of {{ post.paginator.num_pages }}.-->
           </span>
 
           {% if post.has_next %}
-              <a href="?page={{ post.next_page_number }}">next</a>
+            <!--<a href="?page={{ post.next_page_number }}">next</a>-->
           {% endif %}
       </span>
   </div>
--->
+    {% endfor %}
 <!--Map API-->
 
 <!--end of content-->
@@ -153,16 +176,19 @@ Description : {{po.text}}
   <!-- Example row of columns -->
   <div class="row">
     <div class="col-md-4">
+      <img src= {% static "img/find.jpg" %} height="200" width="200"/>
       <h2>Track Lah!</h2>
       <p>Curious about where your donation went? Find out more here!</p>
       <p><a class="btn btn-default" href="/tracklah" role="button">View details &raquo;</a></p>
     </div>
     <div class="col-md-4">
+      <img src= {% static "img/make.jpg" %} height="200" width="200"/>
       <h2>Legit Not?</h2>
       <p>Want to find out if a charity is legit or a scam? Click here to find out!</p>
       <p><a class="btn btn-default" href="/charity" role="button">View details &raquo;</a></p>
    </div>
     <div class="col-md-4">
+    <img src= {% static "img/track.jpg" %} height="200" width="200"/>
       <h2>Pair Up!</h2>
       <p>Want to donate but low on cash? Lend a helping hand instead! Click here now!</p>
       <p><a class="btn btn-default" href="/pairing" role="button">View details &raquo;</a></p>

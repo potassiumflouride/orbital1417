@@ -25,7 +25,8 @@ def index(request):
     query = request.GET.get('q')
     if query:
         post_list = post_list.filter(title__icontains=query) #change here to change search value type
-        context ={'post':post_list
+        context ={'post':post_list,
+        'q':query
         }
 
     return render(request, 'trackhome.html', context)
