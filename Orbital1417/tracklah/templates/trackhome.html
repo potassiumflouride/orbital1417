@@ -73,15 +73,29 @@
   <header class="search">
     <h2 id="track"> Track Your Impact!</h2>
     <div>
-    <form method='GET' action=''>
+    <form method='GET' action="">
     <input type='text' name='q' placeholder='Donation Code' value ='{{ request.GET.q }}'/>
     <input type='submit' value='Search'/>
     </form>
   <!--  </div>-->
   </header>
   <br>
+  {% if post is None%}
+  <p id="title">Welcome to Track Lah!</p>
+  <br>
+  <p id="desc">This WebApp allows you to find out who benefitted from your kind donation
+  as well as where the beneficiary is located at!</p>
+  <p id="desc">Not only can you find out more about the impact you've made, but this gives
+  charity organisation a chance to express their authenticity and level of accountability.</p>
+  {%endif%}
+  {% if not post%}
+  <p class="error">Your donation code may be invalid or you may have written a wrong code<p>
+    <br>
+  <p class="error">Please Try Again!</p>
+  {%endif%}
+  {% if post %}
 {% for po in post %}
-  {% if q %}
+
 
 Donation Code: {{po.title}}<br>
 Donated by: {{po.donor}}<br>
@@ -89,14 +103,6 @@ Beneficiary: {{po.benef}}<br>
 Description: {{po.text}}<br><br>
 Located at {{po.location}}<br>
 
-  {% else %}
-<p id="title">Welcome to Track Lah!</p>
-<br>
-<p id="desc">This WebApp allows you to find out who benefitted from your kind donation
-as well as where the beneficiary is located at!</p>
-<p id="desc">Not only can you find out more about the impact you've made, but this gives
-charity organisation a chance to express their authenticity and level of accountability.</p>
-  {% endif %}
 <!--</div>-->
 </div><!-- Right side of Track Lah -->
 <div class="container col-sm-2">
@@ -126,7 +132,6 @@ charity organisation a chance to express their authenticity and level of account
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdXna1Tt7tk8qHzjeadSqpeGp2J7Ci0TI&callback=initMap">
     </script>
     <script type="text/javascript" src="/static/js/googlemap.js" ></script>
-      {% if q %}
       <script type="text/javascript">
       function initMap() {
         var uluru = {lat: {{po.clat}} , lng: {{po.clng}}  };
@@ -140,16 +145,34 @@ charity organisation a chance to express their authenticity and level of account
         });
       }
     </script>
-    {% endif %}
-
   </body>
+        {% endfor %}
+        {%endif%}
+    {% if not post %}
+    <head>
+        <style>
+          #map {
+            height: 500px;
+            width: 110%;
+           }
+        </style>
+      </head>
+      <body>
+      <!--  <h3>Track Your Donations With Google Maps</h3> -->
+        <div id="map"></div>
+        <script
+        async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdXna1Tt7tk8qHzjeadSqpeGp2J7Ci0TI&callback=initMap">
+        </script>
+  </body>
+  {%endif%}
 </div><!--end of map-->
 </div> <!--end of row-->
 <!--Map API-->
 
 
 
-<!--  <div class="pagination">
+<div class="pagination">
       <span class="step-links">
           {% if post.has_previous %}
 
@@ -164,7 +187,6 @@ charity organisation a chance to express their authenticity and level of account
           {% endif %}
       </span>
   </div>-->
-    {% endfor %}
 <!--Map API-->
 <!--end of content-->
 </div>
