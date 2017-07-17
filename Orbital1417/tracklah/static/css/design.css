@@ -1,0 +1,56 @@
+ div#left.container.col-sm-4 {
+  font-weight: normal;
+  padding-left: 50px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+div.container.col-sm-2 {
+  align-items: center;
+}
+
+div.container.col-sm-6 {
+/* border-style: solid;
+ border-width: 5px;*/
+
+ display: inline-block;
+}
+
+div#left.container.col-sm-4 {
+ border-style: solid;
+ border-width: 5px;
+ padding: 0px 50px 10px 50px;
+ display: inline-block;
+ width: 500px;
+ height: 500px;
+}
+
+
+div#hug.container {
+}
+
+#track {
+  font-weight: bold;
+  font-family: "Impact", Charcoal, sans-serif;
+}
+header.search {
+
+}
+
+#head1 {
+  font-family: "Impact", Charcoal, sans-serif;
+}
+
+
+/* fonts and paragraph */
+
+#title {
+  font-weight: bold;
+  font-style: italic;
+}
+#desc {
+  font-size: 16px;
+  font-weight: bold;
+}
