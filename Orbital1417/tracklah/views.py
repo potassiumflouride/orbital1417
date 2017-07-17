@@ -43,5 +43,3 @@ def index(request):
             return render(request,'trackhome.html',{"post":False})
     else:
         return render(request,'trackhome.html',{"post":None,})
-
-    return render(request, 'trackhome.html', context)

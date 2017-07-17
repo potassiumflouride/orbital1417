@@ -88,11 +88,13 @@
   <p id="desc">Not only can you find out more about the impact you've made, but this gives
   charity organisation a chance to express their authenticity and level of accountability.</p>
   {%endif%}
-  {% if not post%}
+
+  {% if not post and post is not None %}
   <p class="error">Your donation code may be invalid or you may have written a wrong code<p>
     <br>
   <p class="error">Please Try Again!</p>
   {%endif%}
+
   {% if post %}
 {% for po in post %}
 
@@ -148,12 +150,14 @@ Located at {{po.location}}<br>
   </body>
         {% endfor %}
         {%endif%}
-    {% if not post %}
+</div>
+    {% if post is None or not post %}
+    <div class="container col-sm-8">
     <head>
         <style>
           #map {
             height: 500px;
-            width: 110%;
+            width: 135%;
            }
         </style>
       </head>
@@ -164,6 +168,7 @@ Located at {{po.location}}<br>
         async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdXna1Tt7tk8qHzjeadSqpeGp2J7Ci0TI&callback=initMap">
         </script>
+        <script type="text/javascript" src="/static/js/googlemap.js" ></script>
   </body>
   {%endif%}
 </div><!--end of map-->
@@ -186,7 +191,7 @@ Located at {{po.location}}<br>
 
           {% endif %}
       </span>
-  </div>-->
+  </div>
 <!--Map API-->
 <!--end of content-->
 </div>
