@@ -3,14 +3,30 @@ from django.db import models
 from datetime import datetime
 from django.utils import timezone
 
+def upload_location(CharPost, filename):
+    return "%s/%s" %(CharPost.title, filename)
+
 class CharPost(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True)
     donor = models.CharField(max_length=200)
     benef = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     text = models.TextField()
+    height_field = models.IntegerField(default=0)
+    width_field = models.IntegerField(default=0)
     clat = models.CharField(max_length=200, blank=True, null=True)
     clng =  models.CharField(max_length=200, blank=True, null=True)
+    img1 = models.ImageField(upload_to=upload_location,
+                            blank=True, null=True,
+                            width_field="width_field",
+                            height_field="height_field",
+                            )
+    img2 = models.ImageField(upload_to=upload_location,
+                            blank=True, null=True,
+                            width_field="width_field",
+                            height_field="height_field",
+                            )
+
 
     created_date = models.DateTimeField(
             default=timezone.now)
@@ -25,7 +41,7 @@ class CharPost(models.Model):
 
     def __str__(self):
         return self.title
-        
+
 class CharityProjects(models.Model):
     projectName= models.CharField(max_length=200, blank=True, null=True)
     charityName= models.CharField(max_length=200, blank=True, null=True)

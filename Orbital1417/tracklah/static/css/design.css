@@ -42,7 +42,13 @@ header.search {
 #head1 {
   font-family: "Impact", Charcoal, sans-serif;
 }
+/* Images */
 
+img.img-responsive {
+  width:auto;
+  height:240px;
+
+}
 
 /* fonts and paragraph */
 

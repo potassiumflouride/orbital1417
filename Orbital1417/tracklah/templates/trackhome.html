@@ -108,9 +108,11 @@ Located at {{po.location}}<br>
 <!--</div>-->
 </div><!-- Right side of Track Lah -->
 <div class="container col-sm-2">
-<img src= {% static "img/ocip.jpg" %} height="250" width="250"/>
+{% if po.img1 or po.img2 %}
+<img src= "{{po.img1.url}}" class="img-responsive" height="250" width="250"/>
 <br>
-<img src= {% static "img/ocip.jpg" %} height="250" width="250"/>
+<img src= "{{po.img2.url}}" class="img-responsive" height="250" width="250"/>
+{%endif%}
 </div>
 <!-- Images
 <div class="col-sm-3" ><img src= {% static "img/ocip.jpg" %} height="300" width="300"/></div>
@@ -200,6 +202,7 @@ Located at {{po.location}}<br>
 
 <div class="container">
   <!-- Example row of columns -->
+    {% load static %}
   <div class="row">
     <div class="col-md-4" align="center">
       <div class="img__wrap">
