@@ -37,7 +37,7 @@ def pairingPost(request):
     #}
 
     post_list = Pairing.objects.all()
-    paginator = Paginator(post_list, 1) # Show 25 contacts per page
+    paginator = Paginator(post_list, 3) # Show 25 contacts per page
 
     page = request.GET.get('page')
     try:

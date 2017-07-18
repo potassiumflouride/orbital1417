@@ -13,9 +13,11 @@ from pairing.models import Pairing, PairingSignupData
 class PairingAdmin(admin.ModelAdmin):
     search_fields= ['jobcode','charityName', 'title', 'created_date','published_date','text']
     list_display= ('jobcode','published_date','charityName')
-    fields= ['jobcode','charityName', 'title', 'created_date','published_date','text']
+    fields= ['jobcode','charityName', 'title', 'height_field','width_field','img','created_date','published_date','text']
     list_display= ('jobcode','published_date','charityName')
     list_filter= ['jobcode','published_date','charityName']
+    class Meta:
+        model = Pairing
 
 admin.site.register(Pairing, PairingAdmin)
 

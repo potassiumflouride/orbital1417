@@ -66,7 +66,7 @@
   <div class="container">
 
 <!--Paste your content here!-->
-
+<link href= {% static "css/pairing.css" %} rel="stylesheet">
 <!-- {% block content %}
     <h2> Volunteers Wanted!! </h2>
 
@@ -86,41 +86,49 @@
     {% endif %}
 
 {% endblock %}-->
-
-<header>
-  <h2> Volunteers Wanted </h2>
+<header id="pairsearch">
+  <h2 id="search"> Search For Your Desired Jobs </h2>
   <div>
   <form method='GET' action=''>
-  <input type='text' name='q' placeholder='Search posts' value ='{{ request.GET.q }}'/>
+  <input type='text' name='q' placeholder='Search Jobs' value ='{{ request.GET.q }}'/>
   <input type='submit' value='Search'/>
   </form>
   </div>
 </header>
+<hr>
 
+<div class="row">
+  {% for po in post %}
+  <div id="jobs" class="col-sm-3">
+<br>
+{% if po.img %}
+<div class="row">
+<div class="col-sm-5"><img src="{{ po.img.url }}" id="circular" class="img-responsive"></img></div>
+{%endif%}
+<div id="description" class="col-sm-7">
+{{po.charityName}}
+<br>
+Jobcode: {{po.jobcode}}
+<br>
+<a href="" class="btn btn-success" role="button"> Charity Information </a>
+</div> <!-- end of description -->
+</div> <!-- end of row-->
 
-
-
-
+<div class="row">
+  <div id="jobdesc" class="col-sm-12">
+Job Title: {{po.title}}
 <br>
-<br>
-<div>
-{% for po in post %}
-
-<br>
-By {{po.charityName}}
-<br>
-Jobcode : {{po.jobcode}}
-<br>
-{{po.title}}
-<br>
-{{po.text}}
-<br>
-<br>
-<br>
-<a href="/pairing/signup" class="btn btn-success" role="button"> Offer Your Help </a>
-{% endfor %}
+Job Scope: {{po.text}}
+<br></div>
+<div class="col-sm-12">
+<a href="/pairing/signup" class="btn btn-success" role="button"> Offer Your Help! </a>
 </div>
+</div> <!-- end of row -->
+</div> <!-- end of colsm3 -->
+<div id="spacer" class="col-sm-1"></div>
 
+{% endfor %}
+</div> <!-- end of row -->
 
 
 <div class="pagination">
@@ -130,7 +138,7 @@ Jobcode : {{po.jobcode}}
         {% endif %}
 
         <span class="current">
-            Page {{ post.number }} of {{ post.paginator.num_pages }}.
+            Page {{ post.number }} of {{ post.paginator.num_pages }}
         </span>
 
         {% if post.has_next %}
@@ -140,8 +148,8 @@ Jobcode : {{po.jobcode}}
 </div>
 
 <!--end of content-->
-</div>
-</div>
+</div> <!-- end of container-->
+</div> <!-- end of jumbotron-->
 
 
 <div class="container">

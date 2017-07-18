@@ -1,0 +1,42 @@
+div#jobs {
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 5px;
+  padding-left: 20px;
+  display: inline;
+  width: 360px;
+  height: 350px;
+
+}
+
+div#spacer {
+  width: 25px;
+  height: 350px;
+}
+
+h2#search {
+  font-style: italic;
+  font-family: "Impact", Charcoal, italic;
+
+}
+
+img#circular {
+  border-style: solid;
+  border-radius: 100px;
+  border-width: 5px;
+  width: 99px;
+  height: 99px;
+}
+
+div#description {
+  font-weight: bold;
+  text-align: left;
+  padding-left: 0px;
+  padding-top: 12px;
+  width: 200px;
+  height: 100px;
+}
+
+div#jobdesc {
+  padding-top: 25px;
+}
