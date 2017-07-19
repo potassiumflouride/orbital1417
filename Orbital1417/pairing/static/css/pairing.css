@@ -14,6 +14,12 @@ div#spacer {
   height: 350px;
 }
 
+div#horizontal {
+  display: block;
+  width: 330px;
+  height: 100px;
+}
+
 h2#search {
   font-style: italic;
   font-family: "Impact", Charcoal, italic;
@@ -37,6 +43,24 @@ div#description {
   height: 100px;
 }
 
-div#jobdesc {
-  padding-top: 25px;
+div#jobdesc.col-sm-12 {
+  border-style: solid;
+  border-radius: 100px;
+  border-width: 2px;
+  background:  rgba(255,255,255, 1);
+
+  width: 200px;
+  height: 50px;
+
+}
+a#helphand {
+  padding-right: 100px;
+  padding-bottom: 100px;
+}
+div#helphand.img {
+  width: 100px;
+  height:  100px;
+}
+div#helphand.col-sm-7 {
+  text-align: center;
 }

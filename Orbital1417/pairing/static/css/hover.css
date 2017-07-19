@@ -12,6 +12,12 @@
   width: 200px;
 }
 
+#helphand.img__wrap {
+  position: fixed;
+  height: 130px;
+  width: 128px;
+}
+
 .linktext {
   color: #000;
 
