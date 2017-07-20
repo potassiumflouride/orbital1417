@@ -7,7 +7,7 @@ class CharPostModelAdmin(admin.ModelAdmin):
     class Meta:
         model = CharPost
 class charityProjectsAdmin(admin.ModelAdmin):
-    list_display=['projectName','charityName','country','lat','lng']
+    list_display=['chocoCode','projectName','charityName','country','lat','lng']
     class Meta:
         model=CharityProjects
 

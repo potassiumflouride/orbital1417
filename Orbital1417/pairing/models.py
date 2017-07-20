@@ -20,11 +20,12 @@ class Pairing (models.Model):
     title = models.CharField(max_length=200)
     width_field=models.IntegerField(default=0)
     height_field=models.IntegerField(default=0)
-    img = models.ImageField(upload_to=upload_location,
+    '''img = models.ImageField(upload_to=upload_location,
                             blank=True, null=True,
                             width_field="width_field",
                             height_field="height_field",
                             )
+                            '''
     text= models.TextField()
     created_date= models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
