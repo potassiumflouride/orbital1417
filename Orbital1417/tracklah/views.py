@@ -67,4 +67,4 @@ def index(request):
         else:
             return render(request,'trackhome.html',context= {"allCharPost_list": allCharPost_list, "post":post1, "CharityProjects_list":CharityProjects_list})
     else:
-        return render(request, 'trackhome.html', context= {"allCharPost_list": allCharPost_list,"post":False, "CharityProjects_list":CharityProjects_list})
+        return render(request, 'trackhome.html', context= {"allCharPost_list": allCharPost_list,"post":None, "CharityProjects_list":CharityProjects_list})
