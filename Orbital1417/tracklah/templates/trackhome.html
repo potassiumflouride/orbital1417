@@ -69,24 +69,34 @@
 
             <header class="search">
                <h2 id="track"> Track Your Impact!</h2>
+
                <div>
                   <form method='GET' action="">
                      <input id="codeInput" type='text' name='q' placeholder='Donation Code' value ='{{ request.GET.q }}'/>
                      <input type='submit' value='Search'/>
+                     <div id="map"></div>
+
                      <script
                         async defer
                         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdXna1Tt7tk8qHzjeadSqpeGp2J7Ci0TI&callback=initMap"></script>
                      <script type="text/javascript" src="/static/js/googlemap.js" ></script>
 
-                  <script type="text/javascript">
-                      //var json_data= JSON.parse('{{CharityProjects_list |escapejs}}');
-                      var json_data= '{{CharityProjects_list}}';
-                      //var json_data= json_data.replace(/&quot;/g,'');
-                  </script>
+                     <script type="text/javascript">
+
+                      var CharityProjectsData = {{CharityProjects_list|safe}};
+                      var allCharPostData= {{allCharPost_list|safe}};
+
+                      //console.log(typeof(data));
+                      //console.log(data[0].fields.chocoCode);
+
+                     </script>
+
+                     </div>
                   </form>
 
 
                   <!--  </div>-->
+
             </header>
             <br>
 
@@ -115,18 +125,26 @@
             Located at {{po.location}}<br>
             <!--</div>-->
             </div><!-- Right side of Track Lah -->
+
+
+
             <div class="container col-sm-2">
                {% if po.img1 or po.img2 %}
                <img src= "{{po.img1.url}}" class="img-responsive" height="250" width="250"/>
                <br>
                <img src= "{{po.img2.url}}" class="img-responsive" height="250" width="250"/>
                {%endif%}
+
+
             </div>
             <!-- Images
                <div class="col-sm-3" ><img src= {% static "img/ocip.jpg" %} height="300" width="300"/></div>
                <div class="col-sm-1" ></div>
                <div class="col-sm-3" ><img src= {% static "img/ocip.jpg" %} height="300" width="300"/></div>
                -->
+
+               {% endfor %}
+               {%endif%}
             <div class="container col-sm-6">
                <head>
                   <style>
@@ -142,9 +160,9 @@
 
 
    </body>
-   {% endfor %}
-   {%endif%}
-   </div>
+
+
+
    {% if post is None or not post %}
    <div class="container col-sm-8">
    <head>
@@ -157,7 +175,8 @@
    </head>
    <body>
    <!--  <h3>Track Your Donations With Google Maps</h3> -->
-   <div id="map"></div>
+
+
 
    </body>
    {%endif%}

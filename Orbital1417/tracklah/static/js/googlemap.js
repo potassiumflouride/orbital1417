@@ -5,6 +5,7 @@ var singapore = {
 }; //center of map
 
 // sample data, global variable
+/*
 var markerslist = [
     ['eusoffexpeds', 1.2940, 103.7705, "kalaidescope", "nus"],
     ['shearesHall', 1.2914, 103.7756, "idk2", "nus"],
@@ -13,7 +14,9 @@ var markerslist = [
     ['smuHall1', 1.292165498, 103.842663296, 'idk5', "smu"],
     ['sutd', 1.3403, 103.9629, "idk6", "sutd"]
 ];
+*/
 
+/*
 var infoWindowContent = [
     ['<div class="info_content">' +
         '<h3>EusoffHall</h3>' +
@@ -43,6 +46,7 @@ var infoWindowContent = [
         '</div>'
     ]
 ];
+*/
 
 //var iconFilePath= '/static/img/';
 var iconDict = {
@@ -69,11 +73,11 @@ function initMap() {
 
     var iconImg;
 
-    for (i = 0; i < markerslist.length; i++) {
-        var position = new google.maps.LatLng(markerslist[i][1], markerslist[i][2]);
+    for (i = 0; i < CharityProjectsData.length; i++) {
+        var position = new google.maps.LatLng(CharityProjectsData[i].fields.lat, CharityProjectsData[i].fields.lng);
 
         for (var key in iconDict) {
-            if (markerslist[i][4] == key) {
+            if (CharityProjectsData[i].fields.charityName == key) {
                 iconImg = {
                     url: iconDict[key],
                     scaledSize: new google.maps.Size(30, 30),
@@ -85,18 +89,19 @@ function initMap() {
             var marker = new google.maps.Marker({
                 position: position,
                 map: map,
-                title: markerslist[i][0],
-                school: markerslist[i][4],
+                title: CharityProjectsData[i].fields.projectName,
+                charityName:CharityProjectsData[i].fields.charityName,
                 icon: iconImg
 
-            });
-            //show descript when rollover
+                });
+            //show descript when clicked
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    infoWindow.setContent(infoWindowContent[i][0]);
+                    infoWindow.setContent(CharityProjectsData[i].fields.shortDescrip);
                     infoWindow.open(map, marker);
                 }
             })(marker, i));
+
             markerObj.push(marker);
 
         }
@@ -107,11 +112,11 @@ function initMap() {
         google.maps.event.addListener(markerObj[j], 'dblclick', (function(marker, j) {
             return function() {
                 for (i = 0; i < markerObj.length; i++) {
-                    //console.log(markerObj[i].title);
+
                     if (j == i) {
                         continue;
                     }
-                    if (markerObj[i].school != markerObj[j].school) {
+                    if (markerObj[i].charityName != markerObj[j].charityName) {
                         markerObj[i].setVisible(false);
                     }
                 }
@@ -135,29 +140,31 @@ function initMap() {
     controlfilter.index = 1;
     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(controlfilter);
 
-    // json data from models
-    //var json_temp = JSON.stringify(json_file);
-    json_data= json_data.replace(/&quot;/g,'');
-    //json_temp= json_data.substring(1,json_data.length-1);
-    //json_data= JSON.parse(json_data).split(",");
-
-    console.log(json_data);
-    var json_temp= JSON.parse(json_data);
-    console.log(json_temp);
-    //var json_temp=JSON.parse(json_temp);
-    //console.log(json_data);
 
     //donation code to charity project location
     //need to think about resizing the boundaries and to hide the pins if the zoom is too high
-    var chocoCode = document.getElementById('codeInput').value;
-    if(chocoCode!=""){
+    var inputChocoCode = document.getElementById('codeInput').value;
+    console.log("ChocoCode is >>>>>> "+ inputChocoCode);
 
-      var newcenter= {lat: 12.5657, lng: 104.9910};
-      map.panTo(newcenter);
+    if(inputChocoCode!=null){
+
+      for(i=0;i<CharityProjectsData.length;i++){
+        console.log(CharityProjectsData[i].fields.chocoCode);
+        if(CharityProjectsData[i].fields.chocoCode==inputChocoCode){
+          //var recenter={CharityProjectsData[i].fields.lat}
+          var newlat= parseFloat(CharityProjectsData[i].fields.lat);
+          var newlng= parseFloat(CharityProjectsData[i].fields.lng);
+
+        }
+
+      }
+      var recenter= {lat : newlat, lng : newlng};
+      map.panTo(recenter);
     }
 
 
 }
+
 
 function CenterControl(controlDiv, map) {
 

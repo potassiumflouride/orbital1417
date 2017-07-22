@@ -3,8 +3,20 @@ from django.db import models
 from datetime import datetime
 from django.utils import timezone
 
+
 def upload_location(CharPost, filename):
     return "%s/%s" %(CharPost.title, filename)
+
+'''
+    projectName:
+    charityName
+    locationDescription
+    dateofProject:
+    description(long text)
+    chocoCode
+
+'''
+
 
 class CharPost(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True)
@@ -42,6 +54,7 @@ class CharPost(models.Model):
     def __str__(self):
         return self.title
 
+
 class CharityProjects(models.Model):
     chocoCode= models.CharField(max_length=200, blank=True, null=True)
     projectName= models.CharField(max_length=200, blank=True, null=True)
@@ -49,5 +62,7 @@ class CharityProjects(models.Model):
     country= models.CharField(max_length=200, blank=True, null=True)
     lat= models.CharField(max_length=200, blank=True, null=True)
     lng= models.CharField(max_length=200, blank=True, null=True)
+    shortDescrip= models.TextField();
 
-    
+    def __str__(self):
+        return self.chocoCode
