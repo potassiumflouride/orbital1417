@@ -28,7 +28,7 @@ class CharPost(models.Model):
     width_field = models.IntegerField(default=0)
     clat = models.CharField(max_length=200, blank=True, null=True)
     clng =  models.CharField(max_length=200, blank=True, null=True)
-    '''img1 = models.ImageField(upload_to=upload_location,
+    img1 = models.ImageField(upload_to=upload_location,
                             blank=True, null=True,
                             width_field="width_field",
                             height_field="height_field",
@@ -38,7 +38,7 @@ class CharPost(models.Model):
                             width_field="width_field",
                             height_field="height_field",
                             )
-                            '''
+                        
 
     created_date = models.DateTimeField(
             default=timezone.now)

@@ -62,7 +62,7 @@ def index(request):
     if request.method == 'GET' and query: # this will be GET now
         post1 = CharPost.objects.filter(title__iexact=query)
 
-        if post1 in post_list:
+        if post1 is post_list:
             return render(request,'trackhome.html',context={"allCharPost_list": allCharPost_list,"post":False, "CharityProjects_list":CharityProjects_list} )
         else:
             return render(request,'trackhome.html',context= {"allCharPost_list": allCharPost_list, "post":post1, "CharityProjects_list":CharityProjects_list})
