@@ -154,6 +154,7 @@ function initMap() {
           //var recenter={CharityProjectsData[i].fields.lat}
           var newlat= parseFloat(CharityProjectsData[i].fields.lat);
           var newlng= parseFloat(CharityProjectsData[i].fields.lng);
+          console.log(newlat);
 
         }
 

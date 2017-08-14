@@ -1,0 +1,43 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+.carousel {
+
+    max-width: 100%;
+    max-height: 600px;
+    overflow: hidden;
+    width: 100%;
+}
+.carousel-inner> .item img{
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+
+.carousel-caption{
+  position: absolute;
+  top :-40px;
+  padding: 0 20px;
+  text-align: center;
+  margin-top: 500px;
+}
+
+.container {
+  padding:0px;
+
+}
+#footerDetails{
+  height:100px;
+
+}
+#sendFeedback {
+  color: #FF0000;
+  background-color: lightblue;
+}
+#logoContainer{
+  color: #FF0000;
+  background-color: yellow;
+}
+#underWritings{
+  color: #FF0000;
+}

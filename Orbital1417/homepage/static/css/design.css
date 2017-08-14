@@ -60,3 +60,19 @@ header.search {
   font-style: italic;
   color: #FF0000;
 }
+
+#footerDetails{
+  height:100px;
+
+}
+#sendFeedback {
+  color: #FF0000;
+  background-color: lightblue;
+}
+#logoContainer{
+  color: #FF0000;
+  background-color: yellow;
+}
+#underWritings{
+  color: #FF0000;
+}

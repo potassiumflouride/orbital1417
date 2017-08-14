@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="icon" href="../../favicon.ico">
+      <title>HUH-Y</title>
+      {% load static %}
+  <!-- https://www.youtube.com/watch?v=DZTnTK4DVOU -->
+      <!-- Bootstrap core CSS -->
+      <link href= {% static "css/bootstrap.min.css" %} rel="stylesheet">
+      <link href= {% static "css/hover.css" %} rel="stylesheet">
+      <link href= {% static "css/charity.css" %} rel="stylesheet">
+      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <link href= {% static "css/ie10-viewport-bug-workaround.css"%} rel="stylesheet">
+      <!-- Custom styles for this template -->
+      <link href= {% static "css/jumbotron.css" %}rel="stylesheet">
+      <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+      <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+      <script src= {% static "js/ie-emulation-modes-warning.js"%} ></script>
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
+      <!-- Latest compiled and minified CSS -->
+      <!-- GA codes -->
+      <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+         ga('create', 'UA-101933486-1', 'auto');
+         ga('send', 'pageview');
+
+      </script>
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+         })(window,document,'script','dataLayer','GTM-5NVJ6BL');
+      </script>
+      <!-- End Google Tag Manager -->
+   </head>
+   <body>
+      <nav class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="/">Help Us Help Yourself</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+               <form class="navbar-form navbar-right">
+                  <!--<div class="form-group">
+                     <input type="text" placeholder="Username" class="form-control">
+                     </div>
+                     <div class="form-group">
+                     <input type="password" placeholder="Password" class="form-control">
+                     </div>-->
+                  <a href="/userAcc/login" class="btn btn-success" role="button"> Sign in </a>
+                  <a href="/userAcc/signup" class="btn btn-success" role="button"> Sign up </a>
+               </form>
+            </div>
+            <!--/.navbar-collapse -->
+         </div>
+      </nav>
+      <br>
+      <br>
+      <div class="jumbotron">
+         <div class="container">
+            <!--Paste your content here!-->
+            <header>
+               <h2 id="search"> Charity Legit Checker</h2>
+               <div>
+                  <form method='GET' action=''>
+                     <input type='text' name='q' placeholder='Search posts' value ='{{ request.GET.q }}'/>
+                     <input type='submit' value='Search'/>
+                  </form>
+               </div>
+            </header>
+            <br>
+            <br>
+            <div class="row" id="1">
+
+               {% for po in post %}
+               <div class="col-sm-7" id="blogpost" >
+                  <div class="row" id="embed">
+                    <div class="col-sm-4" id="img"></div>
+                    <div class="col-sm-1" id="space"></div>
+                    <div class="col-sm-7" id="Name"><h2 id="charName">{{po.title}}</h2>
+                      <p> Rating: 5/5 </p>
+                    </div>
+
+                    <div class="col-sm-12" id="charDesc">
+                        Description: {{po.text}}
+                    </div><!-- end of charDesc -->
+                    <div class="col-sm-12" id="space">
+                    </div><!-- end of space -->
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-sm-12" id="space">
+                                     Uploaded By: {{po.author}}
+                    </div><!-- end of space -->
+
+                  </div><!--end of row embed-->
+
+            <br><br>
+               {% endfor %}
+             </div><!--end of sm7-->
+            </div> <!--end of row 1-->
+
+            <br>
+            <div class="pagination">
+               <span class="step-links">
+               {% if post.has_previous %}
+               <a href="?page={{ post.previous_page_number }}">previous</a>
+               {% endif %}
+               <span class="current">
+               Page {{ post.number }} of {{ post.paginator.num_pages }}.
+               </span>
+               {% if post.has_next %}
+               <a href="?page={{ post.next_page_number }}">next</a>
+               {% endif %}
+               </span>
+            </div>
+            <!--end of content-->
+         </div>
+      </div>
+
+      <div class="container">
+         <!-- Example row of columns -->
+         {% load static %}
+       <div class="row">
+         <div class="col-md-4" align="center">
+           <div class="img__wrap">
+             <img src= {% static "img/find.jpg" %} height="200" width="200"/>
+             <p class="img__description" align="center"><a class="linktext" href="/charity" role="button">Go to "Legit Not?"</a></p>
+           </div>
+         </div> <!--end of colmd4-->
+         <div class="col-md-4" align="center">
+           <div class="img__wrap">
+             <img src= {% static "img/make.jpg" %} height="200" width="200"/>
+             <p class="img__description" align="center"><a class="linktext" href="/pairing" role="button">Go to "Pair Up!"</a></p>
+           </div>
+        </div><!--end of colmd4-->
+         <div class="col-md-4" align="center">
+         <div class="img__wrap">
+           <img src= {% static "img/track.jpg" %} height="200" width="200"/>
+           <p class="img__description" align="center"><a class="linktext" href="/tracklah" role="button">Go to "Track Lah!"</a></p>
+         </div>
+         </div><!--end of colmd4-->
+       </div><!--end of row-->
+         <footer>
+            <p>&copy; 2016 Company, Inc.</p>
+         </footer>
+      </div>
+
+
+      <!-- /container -->
+      <!-- Bootstrap core JavaScript
+         ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src={% static "js/jquery.min.js"%}></script>
+      <script>window.jQuery || document.write('<script src={% static "js/jquery.min.js"%}><\/script>')</script>
+      <script src={% static "js/bootstrap.min.js"%}></script>
+      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <script src={% static "js/ie10-viewport-bug-workaround.js"%}></script>
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NVJ6BL"
+         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+   </body>
+</html>

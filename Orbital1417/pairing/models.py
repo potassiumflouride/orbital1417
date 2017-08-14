@@ -26,6 +26,7 @@ class Pairing (models.Model):
                             height_field="height_field",
                             )
                             
+
     text= models.TextField()
     created_date= models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
