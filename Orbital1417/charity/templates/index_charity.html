@@ -97,7 +97,7 @@
                {% for po in post %}
                <div class="col-sm-7" id="blogpost" >
                   <div class="row" id="embed">
-                    <div class="col-sm-4" id="img"></div>
+                    <div class="col-sm-4" id="img"><img src={% static "img/c.png"%} width=125 height=100/></div>
                     <div class="col-sm-1" id="space"></div>
                     <div class="col-sm-7" id="Name"><h2 id="charName">{{po.title}}</h2>
                       <p> Rating: 5/5 </p>
@@ -114,6 +114,7 @@
                     <br>
                     <br>
                     <div class="col-sm-12" id="space">
+                      <br>
                                      Uploaded By: {{po.author}}
                     </div><!-- end of space -->
 

@@ -16,7 +16,14 @@ div#img {
   height: 150px;
   padding-top: 20px;
 }
-
+img#img {
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 100px;
+  width: 150px;
+  height: 150px;
+  padding-top: 20px;
+}
 div#charDesc {
   padding-top:25px;
 }
