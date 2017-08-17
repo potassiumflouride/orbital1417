@@ -67,11 +67,13 @@
 
 <br>
 <br>
+<br>
 <div class="jumbotron">
   <div class="container">
 
 <!--Paste your content here!-->
 <link href= {% static "css/pairing.css" %} rel="stylesheet">
+<link href= {% static "css/entry.css" %} rel="stylesheet">
 <!-- {% block content %}
     <h2> Volunteers Wanted!! </h2>
 
@@ -102,37 +104,20 @@
 </header>
 <hr>
 
-<div class="row">
+<div class="row align-items-center">
   {% for po in post %}
-  <div id="jobs" class="col-sm-3">
-<br>
+  <div id="entry" class="col-sm-3">
+    <div class="row align-items-start">
 {% if po.img %}
-<div class="row">
-<div class="col-sm-5"><img src="{{ po.img.url }}" id="circular" class="img-responsive"></img></div>
-{%endif%}
-<div id="description" class="col-sm-7">
-{{po.charityName}}
-<br>
-Jobcode: {{po.jobcode}}
-<br>
-<a href="" class="btn btn-success" role="button"> Charity Information </a>
-</div> <!-- end of description -->
-</div> <!-- end of row-->
-<br>
-<div class="row">
-  <div id="" class="col-sm-12">
-Job Title: {{po.title}}
-<br>
-Job Scope: {{po.text}}
-<br></div>
-<div class="col-sm-7"></div>
-<div class="col-sm-5">
-  <div id="helphand" class="img"><a id="helphand" href="/pairing/signup">
-    <img src= {% static "img/helphand.png" %} height="130" width="128"><a id="helphand" href="/pairing/signup"></img></a></div>
-<!-- <a href="/pairing/signup" class="btn btn-success" role="button"> Offer Your Help! </a> -->
+    <div class="col-lg-12 col-md-12 col-sm-12">
+  <img src="{{ po.img.url }}" id="fullscreen"></img>
 </div>
-</div> <!-- end of row -->
+{%endif%}
+    </div>
+<br>
+
 </div> <!-- end of colsm3 -->
+
 <div id="spacer" class="col-sm-1"></div>
 
 {% endfor %}
