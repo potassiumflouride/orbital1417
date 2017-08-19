@@ -4,49 +4,6 @@ var singapore = {
     lng: 103.8198
 }; //center of map
 
-// sample data, global variable
-/*
-var markerslist = [
-    ['eusoffexpeds', 1.2940, 103.7705, "kalaidescope", "nus"],
-    ['shearesHall', 1.2914, 103.7756, "idk2", "nus"],
-    ['hall1', 1.3453, 103.6873, "idk3", "ntu"],
-    ['hall10', 1.3543, 103.6857, "idk4", "ntu"],
-    ['smuHall1', 1.292165498, 103.842663296, 'idk5', "smu"],
-    ['sutd', 1.3403, 103.9629, "idk6", "sutd"]
-];
-*/
-
-/*
-var infoWindowContent = [
-    ['<div class="info_content">' +
-        '<h3>EusoffHall</h3>' +
-        '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' + '</div>'
-    ],
-    ['<div class="info_content">' +
-        '<h3>shearesHall</h3>' +
-        '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
-        '</div>'
-    ],
-    ['<div class="info_content">' +
-        '<h3>Hall1</h3>' +
-        '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' + '</div>'
-    ],
-    ['<div class="info_content">' +
-        '<h3>Hall10</h3>' +
-        '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
-        '</div>'
-    ],
-    ['<div class="info_content">' +
-        '<h3>smuHall1</h3>' +
-        '<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' + '</div>'
-    ],
-    ['<div class="info_content">' +
-        '<h3>sutd</h3>' +
-        '<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
-        '</div>'
-    ]
-];
-*/
 
 //var iconFilePath= '/static/img/';
 var iconDict = {
@@ -62,22 +19,69 @@ var markerObj = [];
 
 //initalize map
 function initMap() {
+    console.log('inside googlemap js now');
+    /* console.log(typeof(queryMarkerSubData[0].fields.lng)); */
 
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 11,
-        center: singapore
-    });
+    /*if there is NO user Input */
 
-    var infoWindow = new google.maps.InfoWindow(),
-        marker, i;
+    if(userInput == 1){
+      queryCenter= {lat : parseFloat(queryMarkerSubData[0].fields.lat),
+                lng: parseFloat(queryMarkerSubData[0].fields.lng)}
+      var map= new google.maps.Map(document.getElementById('map'),{
+        zoom: 8,
+        center: queryCenter
+      });
+    }
+
+    else{
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 5,
+            center: singapore
+        });
+    }
+
+
 
     var iconImg;
+    /* populating the map with all MARKERS */
 
-    for (i = 0; i < CharityProjectsData.length; i++) {
-        var position = new google.maps.LatLng(CharityProjectsData[i].fields.lat, CharityProjectsData[i].fields.lng);
+    for (i = 0; i < charityProjSubAllData.length; i++) {
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(charityProjSubAllData[i].fields.lat, charityProjSubAllData[i].fields.lng),
+            map: map,
+            title: charityProjSubAllData[i].fields.projectNameSub,
+            charityName:charityProjSubAllData[i].fields.charityName,
+            icon: iconImg
+
+            });
+
+        var infoWindow = new google.maps.InfoWindow({
+          content: charityProjSubAllData[i].fields.shortWriteup
+        });
+
+        /*
+        var infoWindow = new google.maps.InfoWindow(),
+            marker, i;
+        */
+
+        // to show infoWindow for queried markers
+        if(userInput==1 &&
+          charityProjSubAllData[i].fields.projectNameSub == queryMarkerSubData[0].fields.projectNameSub){
+          infoWindow.open(map,marker);
+        }
+        //show descript when clicked
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.open(map, marker);
+            }
+        })(marker, i));
+
+
+        /* Custom Icon WIP
 
         for (var key in iconDict) {
-            if (CharityProjectsData[i].fields.charityName == key) {
+            if (charityProjSubAllData[i].fields.charityName == key) {
                 iconImg = {
                     url: iconDict[key],
                     scaledSize: new google.maps.Size(30, 30),
@@ -85,27 +89,13 @@ function initMap() {
                     anchor: new google.maps.Point(0, 0)
                 };
             }
-
-            var marker = new google.maps.Marker({
-                position: position,
-                map: map,
-                title: CharityProjectsData[i].fields.projectName,
-                charityName:CharityProjectsData[i].fields.charityName,
-                icon: iconImg
-
-                });
-            //show descript when clicked
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    infoWindow.setContent(CharityProjectsData[i].fields.shortDescrip);
-                    infoWindow.open(map, marker);
-                }
-            })(marker, i));
-
-            markerObj.push(marker);
-
         }
+        */
+        
+        markerObj.push(marker);
     }
+
+
 
     //filtering markers according to charity organ when clicked
     for (j = 0; j < markerObj.length; j++) {
@@ -148,12 +138,12 @@ function initMap() {
 
     if(inputChocoCode!=null){
 
-      for(i=0;i<CharityProjectsData.length;i++){
-        console.log(CharityProjectsData[i].fields.chocoCode);
-        if(CharityProjectsData[i].fields.chocoCode==inputChocoCode){
-          //var recenter={CharityProjectsData[i].fields.lat}
-          var newlat= parseFloat(CharityProjectsData[i].fields.lat);
-          var newlng= parseFloat(CharityProjectsData[i].fields.lng);
+      for(i=0;i<charityProjSubAllData.length;i++){
+        console.log(charityProjSubAllData[i].fields.chocoCode);
+        if(charityProjSubAllData[i].fields.chocoCode==inputChocoCode){
+          //var recenter={charityProjSubAllData[i].fields.lat}
+          var newlat= parseFloat(charityProjSubAllData[i].fields.lat);
+          var newlng= parseFloat(charityProjSubAllData[i].fields.lng);
           console.log(newlat);
 
         }
