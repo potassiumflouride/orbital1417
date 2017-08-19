@@ -25,7 +25,7 @@ class Pairing (models.Model):
                             width_field="width_field",
                             height_field="height_field",
                             )
-                            
+
 
     text= models.TextField()
     created_date= models.DateTimeField(default=timezone.now)

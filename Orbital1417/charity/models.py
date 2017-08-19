@@ -3,11 +3,23 @@ from django.db import models
 from datetime import datetime
 from django.utils import timezone
 
+
+def upload_location(Charity, filename):
+    return "%s/%s" %(Charity.title, filename)
+
 class Post(models.Model):
     #model_pic = models.ImageField(upload_to = 'charity/static/img/', default = 'static/img/None/no-img.jpg', null= True, blank =True)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
-    text = models.TextField()
+    mission = models.TextField(null= True, blank =True)
+    vision = models.TextField(null= True, blank =True)
+    width_field=models.IntegerField(default=0)
+    height_field=models.IntegerField(default=0)
+    img = models.ImageField(upload_to=upload_location,
+                                blank=True, null=True,
+                                width_field="width_field",
+                                height_field="height_field",
+                                )
     created_date = models.DateTimeField(
             default=timezone.now)
     published_date = models.DateTimeField(

@@ -1,19 +1,20 @@
 div#entry {
   border-style: solid;
   border-radius: 10px;
-  border-width: 5px;
+  border-width: 3px;
   padding-left: 20px;
   display: inline;
   background-color: #fff;
   padding-bottom: 50px;
   width: 360px;
-  height: 450px;
+  height: 300px;
 }
 
 img#fullscreen {
+  padding-top: 10px;
   border-style: solid;
-  border-width: 5px;
+  border-width: 3px;
   border-radius: 10px;
-  width:305px;
+  width:180px;
   height: 180px;
 }

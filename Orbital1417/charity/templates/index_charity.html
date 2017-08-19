@@ -14,7 +14,7 @@
       <!-- Bootstrap core CSS -->
       <link href= {% static "css/bootstrap.min.css" %} rel="stylesheet">
       <link href= {% static "css/hover.css" %} rel="stylesheet">
-      <link href= {% static "css/charity.css" %} rel="stylesheet">
+      <link href= {% static "css/charity2.css" %} rel="stylesheet">
       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
       <link href= {% static "css/ie10-viewport-bug-workaround.css"%} rel="stylesheet">
       <!-- Custom styles for this template -->
@@ -83,6 +83,8 @@
      </nav>
       <br>
       <br>
+      <br>
+      <br>
       <div class="jumbotron">
          <div class="container">
             <!--Paste your content here!-->
@@ -97,34 +99,37 @@
             </header>
             <br>
             <br>
+
             <div class="row" id="1">
 
                {% for po in post %}
-               <div class="col-sm-7" id="blogpost" >
+               <div class="col-lg-12 col-md-12 col-sm-12" id="blogpost" >
                   <div class="row" id="embed">
-                    <div class="col-sm-4" id="img"></div>
-                    <div class="col-sm-1" id="space"></div>
-                    <div class="col-sm-7" id="Name"><h2 id="charName">{{po.title}}</h2>
-                      <p> Rating: 5/5 </p>
+                    <div class="col-sm-4 col-md-4 col-lg-4" id="img">
+                      {% if po.img %}
+                      <img src = "{{po.img.url}}" id="img" width=300px height=300px></img>
+                      {%endif%}
                     </div>
+                    <div class="col-sm-8 col-md-8 col-lg-8" id="space">
+                        <div class="row" id="rightside">
+                          <div class="col-sm-12 col-md-12 col-lg-12" id="mission">
+                            <h2> Our Mission </h2>
+                            <br>
+                            {{po.mission}}
+                          </div>
 
-                    <div class="col-sm-12" id="charDesc">
-                        Description: {{po.text}}
-                    </div><!-- end of charDesc -->
-                    <div class="col-sm-12" id="space">
-                    </div><!-- end of space -->
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
-                    <div class="col-sm-12" id="space">
-                                     Uploaded By: {{po.author}}
-                    </div><!-- end of space -->
+                          <div class="col-sm-12 col-md-12 col-lg-12" id="vision">
+                            <h2> Our Vision </h2>
+                            <br>
+                            {{po.vision}}
+                          </div>
+                        </div>
+                    </div> <!-- content of charity-->
 
-                  </div><!--end of row embed-->
 
-            <br><br>
+
+
+
                {% endfor %}
              </div><!--end of sm7-->
             </div> <!--end of row 1-->
@@ -146,6 +151,7 @@
             <!--end of content-->
          </div>
       </div>
+    </div>
 
       <div class="container">
          <!-- Example row of columns -->

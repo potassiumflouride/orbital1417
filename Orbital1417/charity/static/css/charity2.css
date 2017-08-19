@@ -1,27 +1,10 @@
-div#blogpost {
-  border-style: solid;
-  border-width: 5px;
-  border-radius: 50px;
-  width: 700px;
-  height: 500px;
-  padding-left: 30px;
-  padding-top: 10px;
-}
 
-div#img {
-  border-style: solid;
-  border-width: 5px;
-  border-radius: 100px;
-  width: 150px;
-  height: 150px;
-  padding-top: 20px;
-}
 img#img {
   border-style: solid;
   border-width: 5px;
-  border-radius: 100px;
-  width: 150px;
-  height: 150px;
+  border-radius: 300px;
+  width: 300px;
+  height: 300px;
   padding-top: 20px;
 }
 div#charDesc {
@@ -42,5 +25,11 @@ h2#search {
   font-weight: bold;
   font-style: italic;
   font-family: "Impact", Charcoal, sans-serif;
+
+}
+
+div#space {
+
+  padding-top: 30px;
 
 }
