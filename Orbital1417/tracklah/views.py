@@ -14,11 +14,11 @@ def index(request):
 
 
     charityProjSubAllData_list= serializers.serialize("json",CharityProjSub.objects.all())
-
+    userInput=False;
     query = request.GET.get('q')
-    userInput=0;
+
     #if there is input from user, send query object and all object
-    if query!= None:
+    if query :
         userInput=1;
         print(query)
         resultChocoCodeProj = ChocoCode.objects.get(donationCode = query) #aacount for invalid entry
@@ -39,7 +39,7 @@ def index(request):
         args = {'queryMarkerSubData': {},
                 'displayProj' :{},
                 'charityProjSubAllData_list':charityProjSubAllData_list
-                ,'userInput':{} }
+                ,'userInput':userInput, }
 
 
     print('view no problem!')

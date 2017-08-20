@@ -132,7 +132,8 @@
 
          <br>
          <br>
-
+         <br>
+         <br>
 
          <div id="infoAreaSearchBar">
             <form method='get'>
@@ -146,10 +147,10 @@
                  </div>
                </form>
              </div>
-        {% if userInput is 0%}
+        {% if userInput is False %}
 
           <h1> Welcome to HUH-y </h1>
-
+          <p>No search yet</p>
 
         {% else %}
          <h1> {{displayProj.projectNameSub}} </h1>
