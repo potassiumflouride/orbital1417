@@ -12,7 +12,34 @@ import json
 
 def index(request):
 
+    charityProjSubAllData_list= serializers.serialize("json",CharityProjSub.objects.all())
+    query = request.GET.get('q')
+    userInput= 0
 
+    #if there is input from user, send query object and all object
+    if query!= None:
+        userInput=1;
+        print(query)
+        resultChocoCodeProj = ChocoCode.objects.get(donationCode = query) #aacount for invalid entry
+        print(resultChocoCodeProj)
+        displayProj = CharityProjSub.objects.get(projectNameSub = resultChocoCodeProj.projectNameSub)
+        print(displayProj.projectNameSub)
+
+        queryMarkerSubData = serializers.serialize("json", CharityProjSub.objects.filter(projectNameSub = resultChocoCodeProj.projectNameSub))
+
+        args = {'queryMarkerSubData':queryMarkerSubData,
+                'displayProj' :displayProj,
+                'charityProjSubAllData_list':charityProjSubAllData_list,
+                'userInput':userInput }
+    else:
+        args = {'queryMarkerSubData': {},
+                'displayProj' :{},
+                'charityProjSubAllData_list':charityProjSubAllData_list,
+                'userInput':userInput }
+    print(query)
+    return render(request, 'trackhome.html', args)
+
+    '''
     charityProjSubAllData_list= serializers.serialize("json",CharityProjSub.objects.all())
     userInput=False;
     query = request.GET.get('q')
@@ -59,7 +86,7 @@ def index(request):
     print('view no problem!')
     return render(request, 'trackhome.html', args)
 
-
+    '''
     #googlemap data
 
     #CharityProjects_list= serializers.serialize("json",CharityProjects.objects.all())

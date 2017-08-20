@@ -4,39 +4,22 @@ footerDetails{
 
 }
 #sendFeedback {
-  color: #FF0000;
-  background-color: lightblue;
+  color: #FFFFFF;
+}
+#contactUs{
+  color: #FFFFFF;
+  background-color: black;
 }
 #logoContainer{
-  color: #FF0000;
-  background-color: yellow;
+  color:#FFFFFF ;
+  background-color: black;
 }
 #underWritings{
-  color: #FF0000;
-  background-color: yellow;
-}
-.carousel {
-
-    max-width: 100%;
-    max-height: 600px;
-    overflow: hidden;
-    width: 100%;
-}
-.carousel-inner> .item img{
-  display: block;
-  max-width: 100%;
-  width: 100%;
-  height: auto;
+  color: #FFFFFF;
+  text-decoration-color: white;
+  background-color: black;
 }
 
-
-.carousel-caption{
-  position: absolute;
-  top :-40px;
-  padding: 0 20px;
-  text-align: center;
-  margin-top: 500px;
-}
 
 .container {
   padding:0px;
@@ -44,8 +27,8 @@ footerDetails{
 }
 
 #sliderContainer{
-  height:810px;
+  height:600px;
   width:100%;
 }
-.fadein { position:relative; height:810px; width:auto; overflow:hidden; }
+.fadein { position:relative; height:600px; width:auto; overflow:hidden; }
 .fadein p { position:absolute; left:0; top:0; }

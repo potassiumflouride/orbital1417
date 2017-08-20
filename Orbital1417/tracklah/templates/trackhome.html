@@ -62,6 +62,10 @@
 
 
     <br>
+    <br>
+    <br>
+    <br>
+
 
     <div class="contents">
       <div class="container col-md-6 half" id="descripArea">
@@ -75,7 +79,7 @@
 
 
           {% if userInput is 0 %}
-
+          <div class= "container", id='jsSlider' >
             <div class="mySlides">
              <img src= {% static "img/sliderIMG1.jpg" %} style="width:100%">
            </div>
@@ -88,18 +92,21 @@
          <div class="mySlides">
           <img src= {% static "img/sliderIMG4.jpg" %} style="width:100%">
         </div>
+      </div>
         {% else %}
-
-            <div class="mySlides">
-             <img src= {{ displayProj.img1 }}style="width:100%">
+        <div class= "container" id='jsSlider' style="  height: 500px !important;
+          overflow: hidden;
+          width:100%;" >
+            <div class="mySlides" id='img1'>
+             <img src= {{ displayProj.img1.url }} style="width:100%">
            </div>
-           <div class="mySlides">
-            <img src= {{ displayProj.img2 }}style="width:100%">
+           <div class="mySlides" id='img1'>
+            <img src= {{ displayProj.img2.url }} style="width:100%">
           </div>
-          <div class="mySlides">
-           <img src= {{ displayProj.img3 }}style="width:100%">
+          <div class="mySlides" id='img1'>
+           <img src= {{ displayProj.img3.url }} style="width:100%">
          </div>
-
+       </div>
          {% endif %}
 
 
@@ -147,11 +154,9 @@
                  </div>
                </form>
              </div>
-        {% if userInput is True %}
-        <h1> fuck you </h1>
-        {% endif%}
+             <br>
 
-        {% if userInput is False %}
+        {% if userInput is 0 %}
 
           <h1> Welcome to HUH-y </h1>
           <p>No search yet</p>
@@ -183,10 +188,12 @@
       </script>
         <script type="text/javascript" src="/static/js/googlemap.js"></script>
         <script type="text/javascript">
-    var charityProjSubAllData = {{charityProjSubAllData_list| safe}}
+            var charityProjSubAllData = {{charityProjSubAllData_list| safe}}
             var queryMarkerSubData= {{queryMarkerSubData|safe}}
             var userInput= {{userInput|escapejs}}
             console.log(queryMarkerSubData);
+            console.log(charityProjSubAllData);
+
             /*console.log(typeof(charityProjSubAllData));
             console.log(queryMarkerSubData);
             console.log(charityProjSubAllData[0].fields.projectNameSub);

@@ -10,7 +10,7 @@ def upload_location(CharityProjSub, filename):
 
 
 class CharityOrg (models.Model):
-    charityName = models.CharField(max_length=200, blank=False, null=False, primary_key=True )
+    charityName = models.CharField(max_length=200, blank=False, null=False, primary_key=True)
     address = models.CharField(max_length=200, blank=False, null=True)
     postalCode= models.IntegerField()
     contactNum = models.IntegerField()
@@ -41,7 +41,7 @@ class CharityProjMain (models.Model):
 
 
 class CharityProjSub (models.Model):
-    projectNameSub= models.CharField(max_length=200,blank=False,null=False,primary_key=True)
+    projectNameSub= models.CharField(max_length=200,blank=False,null=False, primary_key=True)
     projectNameMain= models.ForeignKey(CharityProjMain)
     charityName= models.ForeignKey(CharityOrg)
     shortWriteup= models.TextField(blank=False,null=True)
@@ -73,7 +73,7 @@ class CharityProjSub (models.Model):
         return self.projectNameSub
 
 class ChocoCode (models.Model):
-    donationCode= models.CharField(max_length=200,blank=False,null=False,primary_key=True)
+    donationCode= models.CharField(max_length=200,blank=False,null=False, primary_key=True)
     projectNameSub= models.ForeignKey(CharityProjSub)
     projectNameMain= models.ForeignKey(CharityProjMain)
     charityOrg= models.ForeignKey(CharityOrg)

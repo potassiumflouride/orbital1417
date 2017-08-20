@@ -25,12 +25,14 @@ function initMap() {
     /*if there is NO user Input */
 
     if(userInput == 1){
-      queryCenter= {lat : parseFloat(queryMarkerSubData[0].fields.lat),
-                lng: parseFloat(queryMarkerSubData[0].fields.lng)}
+      queryCenter= {lat : queryMarkerSubData[0].fields.lat,
+                lng: queryMarkerSubData[0].fields.lng };
+
       var map= new google.maps.Map(document.getElementById('map'),{
-        zoom: 8,
+        zoom: 10,
         center: queryCenter
       });
+      console.log(queryCenter);
     }
 
     else{
@@ -57,7 +59,7 @@ function initMap() {
             });
 
         var infoWindow = new google.maps.InfoWindow({
-          content: charityProjSubAllData[i].fields.shortWriteup
+          content: charityProjSubAllData[i].fields.infoWindowWriteup
         });
 
         /*
@@ -66,8 +68,11 @@ function initMap() {
         */
 
         // to show infoWindow for queried markers
-        if(userInput==1 &&
-          charityProjSubAllData[i].fields.projectNameSub == queryMarkerSubData[0].fields.projectNameSub){
+        if(userInput==1  &&
+            queryMarkerSubData[0].fields.lat == charityProjSubAllData[i].fields.lat &&
+            queryMarkerSubData[0].fields.lng == charityProjSubAllData[i].fields.lng
+          ){
+
           infoWindow.open(map,marker);
         }
         //show descript when clicked

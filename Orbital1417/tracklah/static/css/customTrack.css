@@ -145,5 +145,8 @@ html,body {
 }
 
 #jsSlider{
-  background-color: green;
+  height: 500px !important;
+  overflow: hidden;
+  width:100%;
+
 }
