@@ -91,12 +91,12 @@ function initMap() {
             }
         }
         */
-        
+
         markerObj.push(marker);
     }
 
 
-
+    /*
     //filtering markers according to charity organ when clicked
     for (j = 0; j < markerObj.length; j++) {
         google.maps.event.addListener(markerObj[j], 'dblclick', (function(marker, j) {
@@ -113,10 +113,10 @@ function initMap() {
             }
         })(marker, j));
     }
-
+    */
     //custom icon for different charity organ during initial load
 
-
+    /*
     //map recentering function
     var centerControlDiv = document.createElement('div');
     var centerControl = new CenterControl(centerControlDiv, map);
@@ -152,11 +152,11 @@ function initMap() {
       var recenter= {lat : newlat, lng : newlng};
       map.panTo(recenter);
     }
-
+    */
 
 }
 
-
+/*
 function CenterControl(controlDiv, map) {
 
     // Set CSS for the control border.
@@ -227,3 +227,4 @@ function ResetFilter(controlfilter, map) {
     });
 
 }
+*/

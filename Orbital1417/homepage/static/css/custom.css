@@ -42,4 +42,10 @@ footerDetails{
   padding:0px;
 
 }
-#
+
+#sliderContainer{
+  height:810px;
+  width:100%;
+}
+.fadein { position:relative; height:810px; width:auto; overflow:hidden; }
+.fadein p { position:absolute; left:0; top:0; }
