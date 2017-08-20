@@ -45,20 +45,22 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="col-lg-1 col-md-1 col-sm-1"></div>
-        <div class="navbar-header">
+        <div class="navbar-header" >
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar">a</span>
             <span class="icon-bar">b</span>
             <span class="icon-bar">c</span>
           </button>
-          <a class="navbar-brand" href="#"><img src="static/img/LOGOHEAD.png" height=200px width=320px></img></a>
+          <a class="navbar-brand " href="#"><img src= {% static "/img/LOGOHEAD.png" %} height=140px ></img></a>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-4"></div>
-        <div class="col-lg-1 col-sm-1 col-md-1"><a href="/charity"><img src="static/img/FINDACAUSE.png" height=100px width=100px></img></a></div>
-        <div class="col-lg-1 col-sm-1 col-md-1"><a href="/pairing"><img src="static/img/MAKEANIMPACT.png" height=100px width=100px></img></a></div>
-        <div class="col-lg-1 col-sm-1 col-md-1"><a href="/tracklah"><img src="static/img/TRACKURIMPACT.png" height=100px width=100px></img></a></div>
-        <div class="col-lg-1 col-sm-1 col-md-1"><a href="/userAcc"><img src="static/img/USER.png" height=100px width=100px></img></a></div>
+
+        <div class="col-lg-3 col-md-3 col-sm-3 pull-right">
+        <div class="col-lg-3 col-sm-3 col-md-3"><a href="/charity"><img src= {% static "img/FINDACAUSE.png" %} height=60px width=60px align="left"></img></a></div>
+        <div class="col-lg-3 col-sm-3 col-md-3"><a href="/pairing"><img src= {% static "img/MAKEANIMPACT.png" %} height=60px width=60px align="left"></img></a></div>
+        <div class="col-lg-3 col-sm-3 col-md-3"><a href="/tracklah"><img src= {% static "img/TRACKURIMPACT.png" %} height=60px width=60px align="left" ></img></a></div>
+        <div class="col-lg-3 col-sm-3 col-md-3"><a href="/userAcc"><img src= {% static "img/USER.png" %} height=60px width=60px align="left"></img></a></div>
+      </div>
         <!--<div id="navbar" class="navbar-collapse collapse col-lg-1 col-sm-1 col-md-1">
           <form class="navbar-form navbar-right">
             <div class="form-group">
