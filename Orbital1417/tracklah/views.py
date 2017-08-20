@@ -21,17 +21,31 @@ def index(request):
     if query :
         userInput=1;
         print(query)
-        resultChocoCodeProj = ChocoCode.objects.get(donationCode = query) #aacount for invalid entry
-        print(resultChocoCodeProj)
-        displayProj = CharityProjSub.objects.get(projectNameSub = resultChocoCodeProj.projectNameSub)
-        print(displayProj.projectNameSub)
 
-        queryMarkerSubData = serializers.serialize("json", CharityProjSub.objects.filter(projectNameSub = resultChocoCodeProj.projectNameSub))
+        try:
+            resultChocoCodeProj = ChocoCode.objects.get(donationCode = query) #aacount for invalid entry
+        except:
+            userInput = True;
+        else:
+            userInput=1;
+            print(resultChocoCodeProj)
+            displayProj = CharityProjSub.objects.get(projectNameSub = resultChocoCodeProj.projectNameSub)
+            print(displayProj.projectNameSub)
 
-        args = {'queryMarkerSubData':queryMarkerSubData,
-                'displayProj' :displayProj,
-                'charityProjSubAllData_list':charityProjSubAllData_list
-                ,'userInput':userInput }
+            queryMarkerSubData = serializers.serialize("json", CharityProjSub.objects.filter(projectNameSub = resultChocoCodeProj.projectNameSub))
+
+            args = {'queryMarkerSubData':queryMarkerSubData,
+                    'displayProj' :displayProj,
+                    'charityProjSubAllData_list':charityProjSubAllData_list
+                    ,'userInput':userInput }
+
+        if userInput is True:
+            userInput = True;
+            args = {'queryMarkerSubData': {},
+                    'displayProj' :{},
+                    'charityProjSubAllData_list':charityProjSubAllData_list
+                    ,'userInput':userInput, }
+
 
     else:
         #args= {'charityProjSubAllData_list': charityProjSubAllData_list, 'userInput':userInput}

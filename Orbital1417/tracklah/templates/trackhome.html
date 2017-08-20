@@ -147,12 +147,17 @@
                  </div>
                </form>
              </div>
+        {% if userInput is True %}
+        <h1> fuck you </h1>
+        {% endif%}
+
         {% if userInput is False %}
 
           <h1> Welcome to HUH-y </h1>
           <p>No search yet</p>
+        {% endif%}
 
-        {% else %}
+        {% if userInput is 1 %}
          <h1> {{displayProj.projectNameSub}} </h1>
          <h4> <i> by {{displayProj.charityName}} </i></h4>
          <br>
