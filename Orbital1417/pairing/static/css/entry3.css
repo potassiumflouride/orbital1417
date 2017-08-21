@@ -1,0 +1,61 @@
+div#entry {
+  box-shadow: 10px 10px 5px grey;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 3px;
+  padding-left: 20px;
+  display: inline;
+  background-color: #fff;
+  padding-bottom: 50px;
+  width: 360px;
+  height: 300px;
+}
+div#img {
+  border-style: solid;
+  padding-top: 10px;
+  border-radius: 10px;
+  max-width: 100%;
+  max-height: 100%;
+  padding-left: 5px;
+
+
+}
+img#fullscreen {
+}
+
+div#data {
+padding-top: 10px;
+}
+
+div#color {
+  border-style: solid;
+  border-width: 3px;
+  width:352px;
+  height:40px;
+  color: #000
+}
+
+/*fonts*/
+p#charname {
+  font-size: 17px;
+  font-weight: bold;
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif
+}
+
+p#bold {
+  font-size: 17px;
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif
+
+}
+
+h1#searchtitle.search {
+  font-size: 25px;
+  font-style: italic;
+  font-weight: bold;
+  font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif
+
+}
+
+div#signup-btn {
+  padding-left: 50px;
+}

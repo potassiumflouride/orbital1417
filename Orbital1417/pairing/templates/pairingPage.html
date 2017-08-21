@@ -68,14 +68,14 @@
         </nav>
 <br>
 <br>
-<br>
+
 <br>
 <div class="jumbotron">
   <div class="container">
 
 <!--Paste your content here!-->
 <link href= {% static "css/pairing.css" %} rel="stylesheet">
-<link href= {% static "css/entry2.css" %} rel="stylesheet">
+<link href= {% static "css/entry3.css" %} rel="stylesheet">
 <!-- {% block content %}
     <h2> Volunteers Wanted!! </h2>
 
@@ -96,13 +96,19 @@
 
 {% endblock %}-->
 <header id="pairsearch">
-  <h2 id="search"> Search For Your Desired Jobs </h2>
-  <div>
-  <form method='GET' action=''>
-  <input type='text' name='q' placeholder='Search Jobs' value ='{{ request.GET.q }}'/>
-  <input type='submit' value='Search'/>
-  </form>
-  </div>
+  <h1 id="searchtitle" class="search"> Search For Your Ideal Volunteer Jobs </h1>
+  <div id="infoAreaSearchBar">
+     <form method='get'>
+          <div class="input-group col-md-12">
+              <input type="text" name= 'q' class="form-control input-lg" placeholder="Search" value='{{ request.GET.q }}' />
+              <span class="input-group-btn">
+                  <button class="btn btn-info btn-lg" type="submit">
+                      <i class="glyphicon glyphicon-search"></i>
+                  </button>
+              </span>
+          </div>
+        </form>
+      </div>
 </header>
 <hr>
 
@@ -111,10 +117,22 @@
   <div id="entry" class="col-sm-3">
     <div class="row align-items-start">
 {% if po.img %}
-    <div class="col-lg-12 col-md-12 col-sm-12">
-  <img src="{{ po.img.url }}" id="fullscreen"></img>
+    <div class="col-lg-6 col-md-6 col-sm-6" id="img">
+  <img src="{{ po.img.url }}" id="fullscreen" height=120px width=120px></img>
+  <hr>
 </div>
 {%endif%}
+<div class="col-lg-6 col-md-6 col-sm-6" id="data">
+  <br>
+<p id="charname">{{po.charityName}}</p>
+<p id="bold">JOBCODE: {{po.jobcode}}</p>
+<p id="bold">{{po.title}}</p><hr>
+</div>
+<hr>
+
+<div class="col-lg-12 col-md-12 col-sm-12" id="data">
+<p id="bold">Requirements: {{po.text}}</p>
+</div>
     </div>
 <br>
 
@@ -124,7 +142,15 @@
 
 {% endfor %}
 </div> <!-- end of row -->
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-sm-4" id="space"></div>
 
+<div class="col-lg-4 col-md-4 col-sm-4" id="signup-btn">
+  <a href="/pairing/signup/"><img src={% static "img/SIGNUP.png"%} height=250px width=250px></img></a>
+</div>
+
+<div class="col-lg-4 col-md-4 col-sm-4" id="space"></div>
+</div>
 
 <div class="pagination">
     <span class="step-links">
