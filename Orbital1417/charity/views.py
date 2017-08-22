@@ -7,7 +7,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
     post_list = Post.objects.all()
     paginator = Paginator(post_list, 1) # Show 25 contacts per page
-    userInput = False;
 
     page = request.GET.get('page')
     try:
@@ -20,24 +19,13 @@ def index(request):
         post = paginator.page(paginator.num_pages)
 
     context = {
-    'post':post,
-    'userInput': userInput,
+    'post':post
     }
 
     query = request.GET.get('q')
-    userInput = True;
-
     if query:
-        try:
-            post_list = post_list.get(title__icontains=query)
-        except:
-            userInput=1;
-            context ={'post':None,
-                      'userInput': userInput,
-                            }
-        else:
-            context ={'post':post_list,
-                    'userInput': userInput,
-                            }
+        post_list = post_list.filter(title__icontains=query)
+        context ={'post':post_list
+        }
 
     return render(request, 'index_charity.html', context)

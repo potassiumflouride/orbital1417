@@ -72,7 +72,7 @@
 
 
     <div class="contents">
-      <div class="container col-md-6 half" id="descripArea">
+      <div class="container col-md-6 half" id="descripArea" style= "  overflow-x: hidden;">
 
 
         <!-- carousell -->
@@ -97,6 +97,22 @@
           <img src= {% static "img/sliderIMG4.jpg" %} style="width:100%">
         </div>
       </div>
+      {% elif userInput is 2 %}
+      <div class= "container", id='jsSlider' >
+        <div class="mySlides">
+         <img src= {% static "img/sliderIMG1.jpg" %} style="width:100%">
+       </div>
+       <div class="mySlides">
+        <img src= {% static "img/sliderIMG2.jpg" %} style="width:100%">
+      </div>
+      <div class="mySlides">
+       <img src= {% static "img/sliderIMG3.jpg" %} style="width:100%">
+     </div>
+     <div class="mySlides">
+      <img src= {% static "img/sliderIMG4.jpg" %} style="width:100%">
+    </div>
+    </div>
+
         {% else %}
         <div class= "container" id='jsSlider' style="  height: 500px !important;
           overflow: hidden;
@@ -142,9 +158,9 @@
 
 
          <br>
-         <br>
 
-         <div id="infoAreaSearchBar">
+
+         <div id="infoAreaSearchBar" class= 'container' style= " width: 80%">
             <form method='get'>
                  <div class="input-group col-md-12">
                      <input type="text" name= 'q' class="form-control input-lg" placeholder="Donation code here" value='{{ request.GET.q }}' />
@@ -159,20 +175,42 @@
              <br>
 
         {% if userInput is 0 %}
-
+          <div class= 'container' style= " width: 80%" >
           <h1> Welcome to HUH-y </h1>
-          <p>No search yet</p>
+          <p>Enter your Donation Code above to begin =) </p>
+        </div>
         {% endif%}
 
         {% if userInput is 1 %}
+          <div class= 'container' style= " width: 80%" >
          <h1> {{displayProj.projectNameSub}} </h1>
          <h4> <i> by {{displayProj.charityName}} </i></h4>
          <br>
-         <p> {{displayProj.country}} >> {{displayProj.city}} </p>
-         <p>lat>> {{displayProj.lat}} lng>> {{displayProj.lng}} </p>
-         <br>
-         <p> {{displayProj.shortWriteup }}</p>
 
+         <p> {{displayProj.country}} , {{displayProj.city}} </p>
+         <p>Latitude : {{displayProj.lat}} Longitude : {{displayProj.lng}} </p>
+         <br>
+         <p> {{displayProj.shortWriteup | linebreaks }}</p>
+
+      <br>
+      <br>
+
+      <object style="height: 390px; width: 80%">
+        <iframe width="680" height="480px" src="{{displayProj.videoLink}}" frameborder="0" allowfullscreen></iframe>
+      </object>
+      <br><br><br>
+
+     </div>
+        {% endif%}
+
+        {% if userInput is 2 %}
+          <div class= 'container' style= " width: 80%" >
+         <h1> Invalid Donation Code </h1>
+         <h4> <i> by HUH-Y admin</i></h4>
+         <br>
+         <p> We are sorry to inform that the Donation code that you have entered wrong or does not exist.
+          <br> <br>For further assistance, please contact us at orbital1417@gmail.com <p>
+          </div>
         {% endif%}
 
 
@@ -193,9 +231,10 @@
             var charityProjSubAllData = {{charityProjSubAllData_list| safe}}
             var queryMarkerSubData= {{queryMarkerSubData|safe}}
             var userInput= {{userInput|escapejs}}
+            /*
             console.log(queryMarkerSubData);
             console.log(charityProjSubAllData);
-
+            */
             /*console.log(typeof(charityProjSubAllData));
             console.log(queryMarkerSubData);
             console.log(charityProjSubAllData[0].fields.projectNameSub);

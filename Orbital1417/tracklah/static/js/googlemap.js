@@ -4,13 +4,16 @@ var singapore = {
     lng: 103.8198
 }; //center of map
 
-
+var optimalCenter= {
+  lat: 11.4730946,
+  lng: 104.4434885
+};
 //var iconFilePath= '/static/img/';
 var iconDict = {
-    "nus": "/static/img/nusLogo.jpg",
-    "ntu": "/static/img/ntuLogo.png",
-    "smu": "/static/img/smuLogo.png",
-    "sutd": "/static/img/sutdLogo.png"
+    "endSlaveryNow": "/static/img/img/childrenMarkerTransp.png",
+    "sterileAnimals": "/static/img/img/dogMarkerTransp.png",
+    "EdenReforestation": "/static/img/img/treeMarkerTransp.png",
+    "emptyMarker": "/static/img/img/emptyMarkerTransp.png"
 };
 
 
@@ -22,6 +25,7 @@ function initMap() {
     console.log('inside googlemap js now');
     /* console.log(typeof(queryMarkerSubData[0].fields.lng)); */
 
+
     /*if there is NO user Input */
 
     if(userInput == 1){
@@ -29,16 +33,15 @@ function initMap() {
                 lng: queryMarkerSubData[0].fields.lng };
 
       var map= new google.maps.Map(document.getElementById('map'),{
-        zoom: 10,
+        zoom: queryMarkerSubData[0].fields.zoom,
         center: queryCenter
       });
-      console.log(queryCenter);
     }
 
     else{
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 5,
-            center: singapore
+            zoom: 9,
+            center: optimalCenter
         });
     }
 
@@ -46,10 +49,66 @@ function initMap() {
 
     var iconImg;
     /* populating the map with all MARKERS */
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+
+    /*Custom Icon WIP */
+    //console.log(queryMarkerSubData[0].fields.projectNameMain);
+    /*
+    for (var key in iconDict) {
+
+        if (charityProjSubAllData[i].fields.projectNameMain == key) {
+          console.log(charityProjSubAllData[i].fields.projectNameMain);
+            iconPresent= true;
+            iconImg = {
+                url: iconDict[key],
+                scaledSize: new google.maps.Size(30, 30),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 0)
+            };
+        }
+      }
+
+      if(iconPresent== false){
+        iconImg = {
+            url: iconDict["emptyMarker"],
+            scaledSize: new google.maps.Size(30, 30),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(0, 0)
+          }
+        }
+      console.log(iconPresent);
+*/
 
     for (i = 0; i < charityProjSubAllData.length; i++) {
+      var iconPresent= false;
+      for (var key in iconDict) {
+
+          if (charityProjSubAllData[i].fields.projectNameMain == key) {
+            console.log(charityProjSubAllData[i].fields.projectNameMain);
+              iconPresent= true;
+              iconImg = {
+                  url: iconDict[key],
+                  scaledSize: new google.maps.Size(30, 30),
+                  origin: new google.maps.Point(0, 0),
+                  anchor: new google.maps.Point(0, 0)
+              };
+          }
+        }
+
+        if(iconPresent== false){
+          iconImg = {
+              url: iconDict["emptyMarker"],
+              scaledSize: new google.maps.Size(30, 30),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(0, 0)
+            }
+          }
+        console.log(iconPresent);
+
 
         var marker = new google.maps.Marker({
+
             position: new google.maps.LatLng(charityProjSubAllData[i].fields.lat, charityProjSubAllData[i].fields.lng),
             map: map,
             title: charityProjSubAllData[i].fields.projectNameSub,
@@ -57,15 +116,34 @@ function initMap() {
             icon: iconImg
 
             });
+        //var contentpage = '<h2> test </h2><img src= "/static/img/sterileAnimal1.jpg">' + charityProjSubAllData[i].fields.infoWindowWriteup
+        if(userInput==1  &&
+            queryMarkerSubData[0].fields.lat == charityProjSubAllData[i].fields.lat &&
+            queryMarkerSubData[0].fields.lng == charityProjSubAllData[i].fields.lng
+          ){
+          infoWindow.setContent(charityProjSubAllData[i].fields.infoWindowWriteup);
+          infoWindow.open(map,marker);
 
+        }
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+           return function() {
+               infoWindow.setContent(charityProjSubAllData[i].fields.infoWindowWriteup);
+               infoWindow.open(map, marker);
+
+           }
+       })(marker, i));
+
+
+
+       /*
         var infoWindow = new google.maps.InfoWindow({
+          //content: contentpage
           content: charityProjSubAllData[i].fields.infoWindowWriteup
         });
+        console.log(charityProjSubAllData[i].fields.infoWindowWriteup);
 
-        /*
-        var infoWindow = new google.maps.InfoWindow(),
-            marker, i;
-        */
+
 
         // to show infoWindow for queried markers
         if(userInput==1  &&
@@ -81,23 +159,9 @@ function initMap() {
                 infoWindow.open(map, marker);
             }
         })(marker, i));
-
-
-        /* Custom Icon WIP
-
-        for (var key in iconDict) {
-            if (charityProjSubAllData[i].fields.charityName == key) {
-                iconImg = {
-                    url: iconDict[key],
-                    scaledSize: new google.maps.Size(30, 30),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(0, 0)
-                };
-            }
-        }
         */
 
-        markerObj.push(marker);
+        //markerObj.push(marker);
     }
 
 

@@ -18,25 +18,42 @@ def index(request):
 
     #if there is input from user, send query object and all object
     if query!= None:
-        userInput=1;
-        print(query)
-        resultChocoCodeProj = ChocoCode.objects.get(donationCode = query) #aacount for invalid entry
-        print(resultChocoCodeProj)
-        displayProj = CharityProjSub.objects.get(projectNameSub = resultChocoCodeProj.projectNameSub)
-        print(displayProj.projectNameSub)
+        userInput=1
 
-        queryMarkerSubData = serializers.serialize("json", CharityProjSub.objects.filter(projectNameSub = resultChocoCodeProj.projectNameSub))
+        if (ChocoCode.objects.filter(donationCode = query).count()==0):
 
-        args = {'queryMarkerSubData':queryMarkerSubData,
-                'displayProj' :displayProj,
-                'charityProjSubAllData_list':charityProjSubAllData_list,
-                'userInput':userInput }
+            userInput=2 #if donationCode does not exist in our system
+            args = {'queryMarkerSubData':{},
+                    'displayProj' :{},
+                    'charityProjSubAllData_list':charityProjSubAllData_list,
+                    'userInput':userInput }
+
+            return render(request, 'trackhome.html', args)
+        else:
+
+            resultChocoCodeProj = ChocoCode.objects.get(donationCode = query) #aacount for invalid entry
+
+
+            #print(resultChocoCodeProj)
+            displayProj = CharityProjSub.objects.get(projectNameSub = resultChocoCodeProj.projectNameSub)
+            #print(displayProj.projectNameSub)
+
+
+
+            queryMarkerSubData = serializers.serialize("json", CharityProjSub.objects.filter(projectNameSub = resultChocoCodeProj.projectNameSub))
+
+            args = {'queryMarkerSubData':queryMarkerSubData,
+                    'displayProj' :displayProj,
+                    'charityProjSubAllData_list':charityProjSubAllData_list,
+                    'userInput':userInput }
     else:
         args = {'queryMarkerSubData': {},
                 'displayProj' :{},
                 'charityProjSubAllData_list':charityProjSubAllData_list,
                 'userInput':userInput }
-    print(query)
+
+
+
     return render(request, 'trackhome.html', args)
 
     '''

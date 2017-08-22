@@ -76,7 +76,7 @@ img.img-responsive {
   color: #FF0000;
 }
 #descripArea{
-    /*background-color:yellow; */
+  overflow-x: hidden;
 }
 
 .fill {
