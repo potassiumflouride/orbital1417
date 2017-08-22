@@ -10,4 +10,4 @@ class PairingSignupform(forms.ModelForm):
 
     class Meta:
         model= PairingSignupData
-        fields= ('name', 'contact','email','experiences',)
+        fields= ('name','jobcode','contact','email','experiences',)

@@ -38,6 +38,7 @@ def pairingPost(request):
 
     post_list = Pairing.objects.all()
     paginator = Paginator(post_list, 6) # Show 25 contacts per page
+    userInput=False;
 
     page = request.GET.get('page')
     try:
@@ -50,14 +51,25 @@ def pairingPost(request):
         post = paginator.page(paginator.num_pages)
 
     context = {
-    'post':post
+    'post':post,
+    'userInput':userInput,
     }
 
     query = request.GET.get('q')
+    userInput = True;
+
     if query:
-        post_list = post_list.filter(title__icontains=query)
-        context ={'post':post_list
-        }
+        try:
+            post_list = post_list.get(title__icontains=query)
+        except:
+            userInput=1;
+            context ={'post':None,
+                      'userInput': userInput,
+                            }
+        else:
+            context ={'post':post_list,
+                    'userInput': userInput,
+                            }
 
     return render(request, 'pairingPage.html', context)
 

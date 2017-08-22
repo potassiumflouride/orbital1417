@@ -28,6 +28,7 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
+
         <!-- Latest compiled and minified CSS -->
       </head>
 
@@ -43,7 +44,7 @@
                 <span class="icon-bar">b</span>
                 <span class="icon-bar">c</span>
               </button>
-              <a class="navbar-brand " href="#"><img src= {% static "/img/LOGOHEAD.png" %} height=140px ></img></a>
+              <a class="navbar-brand " href="/"><img src= {% static "/img/LOGOHEAD.png" %} height=140px ></img></a>
             </div>
 
             <div class="col-lg-3 col-md-3 col-sm-3 pull-right">
@@ -68,14 +69,13 @@
         </nav>
 <br>
 <br>
-<br>
-<br>
+
 <div class="jumbotron">
   <div class="container">
 
 <!--Paste your content here!-->
 <link href= {% static "css/pairing.css" %} rel="stylesheet">
-<link href= {% static "css/entry2.css" %} rel="stylesheet">
+<link href= {% static "css/entry3.css" %} rel="stylesheet">
 <!-- {% block content %}
     <h2> Volunteers Wanted!! </h2>
 
@@ -96,25 +96,50 @@
 
 {% endblock %}-->
 <header id="pairsearch">
-  <h2 id="search"> Search For Your Desired Jobs </h2>
-  <div>
-  <form method='GET' action=''>
-  <input type='text' name='q' placeholder='Search Jobs' value ='{{ request.GET.q }}'/>
-  <input type='submit' value='Search'/>
-  </form>
-  </div>
+  <h1 id="searchtitle" class="search"> Search For Your Ideal Volunteer Jobs </h1>
+  <div id="infoAreaSearchBar">
+     <form method='get'>
+          <div class="input-group col-md-12">
+              <input type="text" name= 'q' class="form-control input-lg" placeholder="Search" value='{{ request.GET.q }}' />
+              <span class="input-group-btn">
+                  <button class="btn btn-info btn-lg" type="submit">
+                      <i class="glyphicon glyphicon-search"></i>
+                  </button>
+              </span>
+          </div>
+        </form>
+      </div>
 </header>
 <hr>
 
 <div class="row align-items-center">
+
+  {% if userInput is 1 %}
+  <h1>error</h1>
+  {% endif %}
+
   {% for po in post %}
   <div id="entry" class="col-sm-3">
     <div class="row align-items-start">
 {% if po.img %}
-    <div class="col-lg-12 col-md-12 col-sm-12">
-  <img src="{{ po.img.url }}" id="fullscreen"></img>
+    <div class="col-lg-6 col-md-6 col-sm-6" id="img">
+  <img src="{{ po.img.url }}" id="fullscreen" height=120px width=120px></img>
 </div>
 {%endif%}
+<div class="col-lg-6 col-md-6 col-sm-6" id="data">
+
+<p id="charname">{{po.charityName}}</p>
+<p id="bold">JOBCODE: {{po.jobcode}}</p>
+<p id="bold">{{po.title}}</p>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12" id="line">
+<p>__________________________</p>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12" id="data">
+<p id="bold">Requirements: {{po.text}}</p>
+</div>
     </div>
 <br>
 
@@ -123,7 +148,73 @@
 <div id="spacer" class="col-sm-1"></div>
 
 {% endfor %}
+
+
 </div> <!-- end of row -->
+
+<div class="row">
+  <div class="col-lg-4 col-md-4 col-sm-4" id="space"></div>
+
+<div class="col-lg-4 col-md-4 col-sm-4" id="signup-btn">
+  <a href="/pairing/signup/"><img src={% static "img/SIGNUP.png"%} height=250px width=250px></img></a>
+</div>
+<!--
+<div class="well col-lg-4 col-md-4 col-sm-4">
+    <button type="button" id="login" class="btn">Sign Up</button>
+</div>
+<div id="myForm" class="hide">
+
+    <form action="/echo/html/" id="popForm" method="get">
+        <div>
+            <label for="Jobcode">Jobcode:</label>
+            <input type="Jobcode" name="Jobcode" id="Jobcode" class="form-control input-md">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" class="form-control input-md">
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" class="form-control input-md">
+            <label for="denger">Gender:</label>
+            <select name="gender" id="gender" class="form-control input-md"><option value="male">Male</option><option value="female">Female</option></select>
+            <label for="about">About Me:</label>
+            <textarea rows="3" name="about" id="about" class="form-control input-md"></textarea>
+            <button type="button" class="btn btn-primary" data-loading-text="Sending info.."><em class="icon-ok"></em> Save</button>
+        </div>
+    </form>
+</div>
+<div id="result"></div>
+
+<script>
+  $(function(){
+      $('#login').popover({
+
+          placement: 'bottom',
+          title: 'Popover Form',
+          html:true,
+          content:  $('#myForm').html()
+      }).on('click', function(){
+        // had to put it within the on click action so it grabs the correct info on submit
+        $('.btn-primary').click(function(){
+         $('#result').after("form submitted by " + $('#email').val())
+          $.post('/echo/html/',  {
+              Jobcode: $('Jobcode').val(),
+              email: $('#email').val(),
+              name: $('#name').val(),
+              gender: $('#gender').val()
+          }, function(r){
+            $('#pops').popover('hide')
+            $('#result').html('resonse from server could be here' )
+          })
+        })
+    })
+  })
+</script> -->
+
+
+
+
+
+
+<div class="col-lg-4 col-md-4 col-sm-4" id="space"></div>
+</div>
 
 
 <div class="pagination">
@@ -141,14 +232,14 @@
         {% endif %}
     </span>
 </div>
-
+</div>
 <!--end of content-->
 </div> <!-- end of container-->
-</div> <!-- end of jumbotron-->
 
-
-<div class="container">
   <!-- Example row of columns -->
+  <link href= {% static "css/red.css" %} rel="stylesheet">
+
+
   {% load static %}
 <div class="row">
   <div class="col-md-4" align="center">
@@ -170,12 +261,50 @@
   </div>
   </div><!--end of colmd4-->
 </div><!--end of row-->
-  <footer>
-    <p>&copy; 2016 Company, Inc.</p>
-  </footer>
-</div> <!-- /container -->
+
+<link href= {% static "css/custom.css" %} rel="stylesheet">
+  <div class="col-lg-12 col-md-12 col-sm-12" id="red"></div>
+<div class="container-fluid" id="footerDetails" style= "background-color:black">
+  <div class="row col-sm-12 col-xs-12">
 
 
+          <div class="big-box col-md-4 col-xs-12" id="logoContainer" style= "background-color: black">
+           <img src= {% static "img/huhyLogo.jpg" %} />
+          </div>
+
+      <div class="col-xs-8">
+          <div class="row">
+              <div class="col-md-6 col-xs-12">
+                <div class="mini-box text-align" id="contactUs" >
+                  <h4> Contact us </h4>
+                  <p> orbital1417@gmail.com <br>
+                 +65 87654321 <br><br>
+                  National University of Singapore<br>
+                  Computing Drive <br></p>
+                </div></div>
+
+              <div class="mini-box col-md-6 col-xs-12" id="sendFeedback" style="background-color:black" >
+
+                  <h4><font color= "white"> Connect With us Via social Network</font></h4>
+                  <a href="https://www.facebook.com/kuanfei.lee.3"  target="_blank"><img src= {% static "img/fbLogo.jpg" %} width="10%"/></a>
+                  <a href="https://www.instagram.com/kuanfeiii/"  target="_blank"><img src= {% static "img/igLogo.jpg" %} width="10%" /></a>
+
+                </div>
+
+
+
+          </div>
+      </div>
+  </div>
+
+</div>
+
+
+<div class="container-fluid" id= "underWritings" style="color:#FFFFFF" >
+
+  <p> <br><br><br>&copy; 2016 Company, Inc.<br>All rights reserved </p>
+
+</div>
 <!-- /container -->
 <!-- Bootstrap core JavaScript
    ================================================== -->

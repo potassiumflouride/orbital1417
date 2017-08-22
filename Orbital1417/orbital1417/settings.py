@@ -128,7 +128,7 @@ USE_TZ = True
 
 #STATIC_URL = '/static/'
 #heroku
-import dj_database_rul
+"""import dj_database_rul
 db_from_env=dj_database_rul.config*conn_max_age=500)
 DATABASE['default'].update(db_from_env)
 
@@ -136,10 +136,10 @@ STATIC_RUL= '/static/'
 STATICFILES_DIRS= [
     os.path.join(BASE_DIR,"static"),
 
-]
+]"""
 #heroku end
 
-STATIC_ROOT- os.path.join( BASE_DIR,"staticfiles")
+STATIC_ROOT= os.path.join( BASE_DIR,"staticfiles")
 STATIFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [

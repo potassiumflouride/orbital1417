@@ -14,7 +14,8 @@
       <!-- Bootstrap core CSS -->
       <link href= {% static "css/bootstrap.min.css" %} rel="stylesheet">
       <link href= {% static "css/hover.css" %} rel="stylesheet">
-      <link href= {% static "css/charity2.css" %} rel="stylesheet">
+      <link href= {% static "css/charity.css" %} rel="stylesheet">
+      <link href= {% static "css/wording2.css" %} rel="stylesheet">
       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
       <link href= {% static "css/ie10-viewport-bug-workaround.css"%} rel="stylesheet">
       <!-- Custom styles for this template -->
@@ -60,7 +61,7 @@
              <span class="icon-bar">b</span>
              <span class="icon-bar">c</span>
            </button>
-           <a class="navbar-brand " href="#"><img src= {% static "/img/LOGOHEAD.png" %} height=140px ></img></a>
+           <a class="navbar-brand " href="/"><img src= {% static "/img/LOGOHEAD.png" %} height=140px ></img></a>
          </div>
 
          <div class="col-lg-3 col-md-3 col-sm-3 pull-right">
@@ -83,79 +84,122 @@
          </div>/.navbar-collapse -->
        </div>
      </nav>
-      <br>
-      <br>
+
       <br>
       <br>
       <div class="jumbotron">
          <div class="container">
             <!--Paste your content here!-->
             <header>
-               <h2 id="search"> Charity Legit Checker</h2>
+              <div id="infoAreaSearchBar">
+                 <form method='get'>
+                      <div class="input-group col-md-12">
+                          <input type="text" name= 'q' class="form-control input-lg" placeholder="Search" value='{{ request.GET.q }}' />
+                          <span class="input-group-btn">
+                              <button class="btn btn-info btn-lg" type="submit">
+                                  <i class="glyphicon glyphicon-search"></i>
+                              </button>
+                          </span>
+                      </div>
+                    </form>
+                  </div>
+<!--               <h2 id="search"> Charity Legit Checker</h2>
                <div>
                   <form method='GET' action=''>
                      <input type='text' name='q' placeholder='Search posts' value ='{{ request.GET.q }}'/>
                      <input type='submit' value='Search'/>
                   </form>
-               </div>
+               </div>-->
             </header>
+
+
+            <br>
             <br>
             <br>
 
             <div class="row" id="1">
+              {% if userInput is False %}
+              <div class="col-lg-12 col-sm-12 col-md-12" id="hme">
+                <img src={% static "img/HOMECHAR.png " %} height=700px width=700px></img>
 
-               {% for po in post %}
+              </div>
+              {%endif%}
+
+              {% if userInput is 1 %}
+              <div class="col-lg-12 col-sm-12 col-md-12" id="error">
+                <img src={% static "img/error.png " %} height=500px width=888px></img>
+
+              </div>
+
+              {%endif%}
+
+              {% if userInput is True %}
+
                <div class="col-lg-12 col-md-12 col-sm-12" id="blogpost" >
                   <div class="row" id="embed">
                     <div class="col-sm-4 col-md-4 col-lg-4" id="img">
-                      {% if po.img %}
-                      <img src = "{{po.img.url}}" id="img" width=300px height=300px></img>
+                      {% if post.img %}
+                      <img src = "{{post.img.url}}" id="img" width=300px height=300px></img>
                       {%endif%}
                     </div>
-                    <div class="col-sm-8 col-md-8 col-lg-8" id="space">
+                      <div class="col-sm-1 col-md-1 col-lg-1" id="space"></div>
+                    <div class="col-sm-7 col-md-7 col-lg-7" id="dataspace">
                         <div class="row" id="rightside">
+                          <div class="col-sm-12 col-md-12 col-lg-12" id="Cname">
+                            <h1 id="Cname">{{post.title}}</h1>
+                          </div>
+                            <div class="row" id="mvdata">
+                              <div class="col-sm-8 col-md-8 col-lg-8" id="mvdata2">
+                                <div class="row" id="mvdata3">
                           <div class="col-sm-12 col-md-12 col-lg-12" id="mission">
-                            <h2> Our Mission </h2>
+                            <h2 id="mv" class="1"> Our Mission</h2>
                             <br>
-                            {{po.mission}}
+                            {{post.mission}}
                           </div>
 
                           <div class="col-sm-12 col-md-12 col-lg-12" id="vision">
-                            <h2> Our Vision </h2>
+                            <h2 id="mv" class="1"> Our Vision </h2>
                             <br>
-                            {{po.vision}}
+                            {{post.vision}}
                           </div>
+                        </div>
+                          </div>
+                          <div class="col-sm-4 col-md-4 col-lg-4" id="Stamp">
+                            <img src= {% static "img/LEGIT.png" %} height=200px width=200px></img>
+                          </div>
+                        </div> <!-- mv data -->
+
                         </div>
                     </div> <!-- content of charity-->
 
 
-
-
-
-               {% endfor %}
+               {%endif%}
              </div><!--end of sm7-->
+
+             <div class="pagination">
+                <span class="step-links">
+                {% if post.has_previous %}
+                <a href="?page={{ post.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="current">
+                Page {{ post.number }} of {{ post.paginator.num_pages }}.
+                </span>
+                {% if post.has_next %}
+                <a href="?page={{ post.next_page_number }}">next</a>
+                {% endif %}
+                </span>
+             </div>
+             <!--end of content-->
+          </div>
+       </div>
+     </div>
             </div> <!--end of row 1-->
 
-            <br>
-            <div class="pagination">
-               <span class="step-links">
-               {% if post.has_previous %}
-               <a href="?page={{ post.previous_page_number }}">previous</a>
-               {% endif %}
-               <span class="current">
-               Page {{ post.number }} of {{ post.paginator.num_pages }}.
-               </span>
-               {% if post.has_next %}
-               <a href="?page={{ post.next_page_number }}">next</a>
-               {% endif %}
-               </span>
-            </div>
-            <!--end of content-->
-         </div>
-      </div>
-    </div>
+              <link href= {% static "css/red.css" %} rel="stylesheet">
 
-      <div class="container">
+
+
+
          <!-- Example row of columns -->
          {% load static %}
        <div class="row">
@@ -178,12 +222,50 @@
          </div>
          </div><!--end of colmd4-->
        </div><!--end of row-->
-         <footer>
-            <p>&copy; 2016 Company, Inc.</p>
-         </footer>
-      </div>
+      <div id="red"></div>
+       <link href= {% static "css/custom.css" %} rel="stylesheet">
+
+       <div class="container-fluid" id="footerDetails" style= "background-color:black">
+         <div class="row col-sm-12 col-xs-12">
 
 
+                 <div class="big-box col-md-4 col-xs-12" id="logoContainer" style= "background-color: black">
+                  <img src= {% static "img/huhyLogo.jpg" %} />
+                 </div>
+
+             <div class="col-xs-8">
+                 <div class="row">
+                     <div class="col-md-6 col-xs-12">
+                       <div class="mini-box text-align" id="contactUs" >
+                         <h4> Contact us </h4>
+                         <p> orbital1417@gmail.com <br>
+                        +65 87654321 <br><br>
+                         National University of Singapore<br>
+                         Computing drive <br></p>
+                       </div></div>
+
+                     <div class="mini-box col-md-6 col-xs-12" id="sendFeedback" style="background-color:black" >
+
+                         <h4><font color= "white"> Connect With us Via social Network</font></h4>
+                         <a href="https://www.facebook.com/kuanfei.lee.3"  target="_blank"><img src= {% static "img/fbLogo.jpg" %} width="10%"/></a>
+                         <a href="https://www.instagram.com/kuanfeiii/"  target="_blank"><img src= {% static "img/igLogo.jpg" %} width="10%" /></a>
+
+                       </div>
+
+
+
+                 </div>
+             </div>
+         </div>
+
+       </div>
+
+
+       <div class="container-fluid" id= "underWritings" style="color:#FFFFFF" >
+
+         <p> <br><br><br>&copy; 2016 Company, Inc.<br>All rights reserved </p>
+
+       </div>
       <!-- /container -->
       <!-- Bootstrap core JavaScript
          ================================================== -->
