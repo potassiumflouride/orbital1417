@@ -5,8 +5,8 @@ var singapore = {
 }; //center of map
 
 var optimalCenter= {
-  lat: 11.4730946,
-  lng: 104.4434885
+  lat: 11.4730168,
+  lng: 104.4786815
 };
 //var iconFilePath= '/static/img/';
 var iconDict = {
@@ -40,7 +40,7 @@ function initMap() {
 
     else{
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 9,
+            zoom: 8,
             center: optimalCenter
         });
     }
@@ -85,7 +85,7 @@ function initMap() {
       for (var key in iconDict) {
 
           if (charityProjSubAllData[i].fields.projectNameMain == key) {
-            console.log(charityProjSubAllData[i].fields.projectNameMain);
+        
               iconPresent= true;
               iconImg = {
                   url: iconDict[key],
