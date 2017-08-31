@@ -115,7 +115,7 @@
 <div class="row align-items-center">
 
   {% if userInput is 1 %}
-  <h1>error</h1>
+  <h3>No Similar Job Request, Try again!</h1>
   {% endif %}
 
   {% for po in post %}
@@ -154,9 +154,10 @@
 
 <div class="row">
   <div class="col-lg-4 col-md-4 col-sm-4" id="space"></div>
-
+{% if userInput is not 1 %}
 <div class="col-lg-4 col-md-4 col-sm-4" id="signup-btn">
   <a href="/pairing/signup/"><img src={% static "img/SIGNUP.png"%} height=250px width=250px></img></a>
+  {%endif%}
 </div>
 <!--
 <div class="well col-lg-4 col-md-4 col-sm-4">
@@ -216,7 +217,7 @@
 <div class="col-lg-4 col-md-4 col-sm-4" id="space"></div>
 </div>
 
-
+{% if userInput is not 1 %}
 <div class="pagination">
     <span class="step-links">
         {% if post.has_previous %}
@@ -232,6 +233,7 @@
         {% endif %}
     </span>
 </div>
+  {%endif%}
 </div>
 <!--end of content-->
 </div> <!-- end of container-->

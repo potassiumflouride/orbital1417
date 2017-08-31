@@ -54,7 +54,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'livereload.middleware.LiveReloadScript',
 
 ]
 
@@ -140,7 +139,7 @@ STATICFILES_DIRS= [
 #heroku end
 
 STATIC_ROOT= os.path.join( BASE_DIR,"staticfiles")
-STATIFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+#STATIFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static"),
