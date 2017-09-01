@@ -127,26 +127,26 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #heroku
-"""import dj_database_rul
-db_from_env=dj_database_rul.config*conn_max_age=500)
-DATABASE['default'].update(db_from_env)
+import dj_database_url
+db_from_env= dj_database_url.config (conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
-STATIC_RUL= '/static/'
+STATIC_URL= '/static/'
 STATICFILES_DIRS= [
     os.path.join(BASE_DIR,"static"),
 
-]"""
+]
 #heroku end
 
 STATIC_ROOT= os.path.join( BASE_DIR,"staticfiles")
-#STATIFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static"),
     "/homepage/static",
 ]
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static_cdn")
+#STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static_cdn")
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 MEDIA_URL="/media/"
 
