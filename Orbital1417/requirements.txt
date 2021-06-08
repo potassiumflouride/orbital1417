@@ -18,7 +18,7 @@ modulegraph==0.10.4
 nose==1.3.7
 numpy==1.8.0rc1
 olefile==0.44
-Pillow==4.2.1
+Pillow==8.2.0
 psycopg2==2.7.3
 py2app==0.7.3
 pyobjc-core==2.5.1
